@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PurchaseRequestApproval.Models\PurchaseRequestApproval.Models.csproj" />
     <ProjectReference Include="..\PurchaseRequestApproval.Utility\PurchaseRequestApproval.Utility.csproj" />
   </ItemGroup>
