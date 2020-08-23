@@ -5,10 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PurchaseRequestApproval.Models;
+// using PurchaseRequestApproval.Models;
+using PurchaseRequestApproval.Models.ViewModels;
 
-namespace PurchaseRequestApproval.Controllers
+namespace PurchaseRequestApproval.Areas.Empolyee.Controllers
 {
+    [Area("Employee")] // explicity declear the controller is related to the employee area
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

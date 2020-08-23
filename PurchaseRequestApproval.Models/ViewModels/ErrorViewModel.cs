@@ -1,6 +1,8 @@
 using System;
 
-namespace PurchaseRequestApproval.Models
+namespace PurchaseRequestApproval.Models.ViewModels
+
+
 {
     public class ErrorViewModel
     {

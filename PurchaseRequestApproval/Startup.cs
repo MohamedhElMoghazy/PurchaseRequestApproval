@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using PurchaseRequestApproval.Data;
+// using PurchaseRequestApproval.DataAccess.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PurchaseRequestApproval.DataAccess.Data;
+using PurchaseRequestApproval.Models.ViewModels; // configure the new folders for view error
 
 namespace PurchaseRequestApproval
 {
@@ -62,7 +64,7 @@ namespace PurchaseRequestApproval
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area=Employee}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
