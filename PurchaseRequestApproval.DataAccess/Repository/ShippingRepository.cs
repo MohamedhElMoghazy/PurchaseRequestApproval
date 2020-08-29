@@ -23,7 +23,10 @@ namespace PurchaseRequestApproval.DataAccess.Repository
             if(objFromDb != null )
             { 
              objFromDb.ShippingName = shipping.ShippingName;
-             _db.SaveChanges();
+             objFromDb.ShippingDescription = shipping.ShippingDescription;
+             objFromDb.ShippingACC = shipping.ShippingACC;
+
+                _db.SaveChanges();
             }
         }
     }
