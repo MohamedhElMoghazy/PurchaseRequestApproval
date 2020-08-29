@@ -19,6 +19,7 @@ namespace PurchaseRequestApproval.DataAccess.Repository
         }
 
         public IShippingRepository Shipping { get; private set; }
+        public IPurchaseTypeRepository PurchaseType { get; private set; }
         public ISP_Call SP_Call { get; private set; }
 
         SP_Call IUnitOfWork.SP_Call => throw new NotImplementedException();
