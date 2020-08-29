@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PurchaseRequestApproval.DataAccess.Data;
 using PurchaseRequestApproval.Models.ViewModels; // configure the new folders for view error
+using PurchaseRequestApproval.DataAccess.Repository.IRepository;
+using PurchaseRequestApproval.DataAccess.Repository;
 
 namespace PurchaseRequestApproval
 {
@@ -34,6 +36,7 @@ namespace PurchaseRequestApproval
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation(); // add AddRazorRunTime Compilation To the poject
             services.AddRazorPages();
         }
