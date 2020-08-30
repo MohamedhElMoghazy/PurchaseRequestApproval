@@ -11,7 +11,7 @@ namespace PurchaseRequestApproval.Models
         [Key] // annonce a key value
 
         public int Id { get; set; } // Id of Employee
-        [Display(Name = "Employee Name")]
+        [Display(Name = "EmployeeName")]
         [Required]
         [MaxLength(50)]
         public String EmployeeName { get; set; } // Name of Employee

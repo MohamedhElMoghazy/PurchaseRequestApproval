@@ -11,7 +11,7 @@ namespace PurchaseRequestApproval.Models
         [Key] // annonce a key value
 
         public int Id { get; set; } // Id of purchasing type
-        [Display(Name = "Vendor Name")]
+        [Display(Name = "VendorName")]
         [Required]
         [MaxLength(50)]
         public String VendorName { get; set; } // Name of Vendor

@@ -11,7 +11,7 @@ namespace PurchaseRequestApproval.Models
         public int Id { get; set; }
 
         // annonce a display name and it is required 
-        [Display(Name ="Shipping Name")]
+        [Display(Name ="ShippingName")]
         [Required]
         [MaxLength(50)]
         public string ShippingName { get; set; }
