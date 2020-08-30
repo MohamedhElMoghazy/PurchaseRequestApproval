@@ -17,5 +17,9 @@ namespace PurchaseRequestApproval.DataAccess.Data
         // add the shipping method to the database
         public DbSet<Shipping> Shippings { get; set; }
         public DbSet<PurchaseType> PurchaseTypes { get; set; }
+        public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+
+
     }
 }

@@ -14,6 +14,10 @@ namespace PurchaseRequestApproval.DataAccess.Repository
             _db = db;
             Shipping = new ShippingRepository(_db);
             PurchaseType = new PurchaseTypeRepository(_db);
+
+            Vendor = new VendorRepository(_db);
+            Employee = new EmployeeRepository(_db);
+
             SP_Call = new SP_Call(_db);
 
 
@@ -21,6 +25,11 @@ namespace PurchaseRequestApproval.DataAccess.Repository
 
         public IShippingRepository Shipping { get; private set; }
         public IPurchaseTypeRepository PurchaseType { get; private set; }
+
+        public IVendorRepository Vendor { get; private set; }
+        public IEmployeeRepository Employee { get; private set; }
+
+
         public ISP_Call SP_Call { get; private set; }
 
         SP_Call IUnitOfWork.SP_Call => throw new NotImplementedException();
