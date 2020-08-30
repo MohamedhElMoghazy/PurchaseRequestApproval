@@ -40,7 +40,32 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
          //   return View();
         }
 
+        // To define a post action method 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(PurchaseType purchaseType) 
+        { 
+            if (ModelState.IsValid)
+            {
+                if (purchaseType.Id==0) // create case whenever no ID posted
+                {
+                    _unitOfWork.PurchaseType.Add(purchaseType);
+                    
 
+                }
+                else
+                {
+                    _unitOfWork.PurchaseType.Update(purchaseType);
+                    
+                }
+                _unitOfWork.Save();
+                return RedirectToAction(nameof(Index)); // if any mistake the name is gotted
+
+            }
+            return View(purchaseType);
+        
+        
+        }
 
 
 

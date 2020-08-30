@@ -26,7 +26,7 @@ namespace PurchaseRequestApproval.DataAccess.Repository
              objFromDb.ShippingDescription = shipping.ShippingDescription;
              objFromDb.ShippingACC = shipping.ShippingACC;
 
-                _db.SaveChanges();
+                // _db.SaveChanges();
             }
         }
     }

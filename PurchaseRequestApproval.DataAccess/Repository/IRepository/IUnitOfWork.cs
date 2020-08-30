@@ -9,7 +9,7 @@ namespace PurchaseRequestApproval.DataAccess.Repository.IRepository
         IShippingRepository Shipping { get;  }
         IPurchaseTypeRepository PurchaseType { get; }
         SP_Call SP_Call  { get; }
-
+        void Save();
 
     }
 }

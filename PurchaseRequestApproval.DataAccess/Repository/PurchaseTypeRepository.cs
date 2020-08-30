@@ -24,7 +24,7 @@ namespace PurchaseRequestApproval.DataAccess.Repository
             {
                 objFromDb.PurcahseTypeName = purchaseType.PurcahseTypeName;
                 objFromDb.PurcahseCode = purchaseType.PurcahseCode;
-                _db.SaveChanges();
+                //_db.SaveChanges();
             }
         }
     }
