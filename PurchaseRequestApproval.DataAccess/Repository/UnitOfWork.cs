@@ -13,6 +13,7 @@ namespace PurchaseRequestApproval.DataAccess.Repository
         {
             _db = db;
             Shipping = new ShippingRepository(_db);
+            PurchaseType = new PurchaseTypeRepository(_db);
             SP_Call = new SP_Call(_db);
 
 

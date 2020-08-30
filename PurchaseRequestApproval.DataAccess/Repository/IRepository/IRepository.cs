@@ -12,10 +12,11 @@ namespace PurchaseRequestApproval.DataAccess.Repository.IRepository
 
         // to get a list of items with specific category 
         IEnumerable<T> GetAll(
-    Expression<Func<T, bool>> filter = null,
-    Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-    string includeProperties = null
-    );
+     Expression<Func<T, bool>> filter = null,
+     Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+     string includeProperties = null
+     );
+
 
         // to get a list of items header 
         T GetFirstOrDefault(
