@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using PurchaseRequestApproval.DataAccess.Repository.IRepository;
 using PurchaseRequestApproval.Models;
 
@@ -87,6 +88,19 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                         }
             */
 
+
+        }
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var objFromDb = _unitOfWork.PurchaseType.Get(id);
+            if (objFromDb == null)
+            {
+                return Json(new { success = false, Message = "Error while deleting" });
+            }
+            _unitOfWork.PurchaseType.Remove(objFromDb);
+            _unitOfWork.Save();
+            return Json(new { success = true, Message = "Delete Successful" });
 
         }
 
