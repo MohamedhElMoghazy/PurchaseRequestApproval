@@ -2,7 +2,7 @@
 @model PurchaseRequestApproval.Models.Employee
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var title = "Create Shipping";
+    var title = "Add Employee";
 }
 
 <form method="post">
@@ -28,18 +28,70 @@
                 </div>
             </div>
 
-            <!--Adding code number-->
+            <!--Adding EmployeeCode-->
             <div class="form-group row">
                 <div class="col-4">
-                    <label asp-for="PurcahseCode"></label>
+                    <label asp-for="EmployeeCode"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="PurcahseCode" class=" form-control" />
-                    <span asp-validation-for="PurcahseCode" class=" text-danger"></span>
+                    <input asp-for="EmployeeCode" class=" form-control" />
+
                 </div>
             </div>
 
-            <!--Adding code number -->
+            <!--Adding Employee Code -->
+            <!--Adding EmployeePosition-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="EmployeePosition"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="EmployeePosition" class=" form-control" />
+
+                </div>
+            </div>
+
+            <!--Adding EmployeePosition -->
+            <!--Adding EmployeePhone-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="EmployeePhone"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="EmployeePhone" class=" form-control" />
+                    <span asp-validation-for="EmployeePhone" class=" text-danger"></span>
+
+                </div>
+            </div>
+
+            <!--Adding EmployeePhone -->
+            <!--Adding EmployeeEmail-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="EmployeeEmail"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="EmployeeEmail" class=" form-control" />
+                    <span asp-validation-for="EmployeeEmail" class=" text-danger"></span>
+
+                </div>
+            </div>
+
+            <!--Adding EmployeeEmail -->
+            <!--Adding EmployeeSite-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="EmployeeSite"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="EmployeeSite" class=" form-control" />
+                    <span asp-validation-for="EmployeeSite" class=" text-danger"></span>
+
+                </div>
+            </div>
+
+            <!--Adding EmployeeSite -->
+
 
             <div class="form-group row">
                 <div class="col-8 offset-4">

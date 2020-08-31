@@ -12,8 +12,17 @@ $(document).ready(function () {
             },
 
             "columns": [
-                { "data": "purcahseTypeName", "width ": "30%" },
-                { "data": "purcahseCode", "width ": "30%" },
+
+                { "data": "employeeName", "width ": "15%" },
+                { "data": "employeeCode", "width ": "15%" },
+                { "data": "employeePosition", "width ": "15%" },
+                { "data": "employeePhone", "width ": "15%" },
+                { "data": "employeeEmail", "width ": "15%" },
+                { "data": "employeeSite", "width ": "15%" },
+
+
+
+
                 {
                     "data": "id",
                     "render": function (data) {
@@ -27,7 +36,7 @@ $(document).ready(function () {
                                 </a>
                             </div>
                            `;
-                    }, "width": "40%"
+                    }, "width": "10%"
                 }
             ]
         });

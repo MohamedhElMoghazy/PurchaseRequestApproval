@@ -12,8 +12,9 @@ $(document).ready(function () {
             },
 
             "columns": [
-                { "data": "purcahseTypeName", "width ": "30%" },
-                { "data": "purcahseCode", "width ": "30%" },
+                { "data": "shippingName", "width ": "20%" },
+                { "data": "shippingDescription", "width ": "20%" },
+                { "data": "shippingACC", "width ": "20%" },
                 {
                     "data": "id",
                     "render": function (data) {

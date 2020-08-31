@@ -12,8 +12,18 @@ $(document).ready(function () {
             },
 
             "columns": [
-                { "data": "purcahseTypeName", "width ": "30%" },
-                { "data": "purcahseCode", "width ": "30%" },
+                { "data": "vendorName", "width ": "10%" },
+                { "data": "vendoreCode", "width ": "10%" },
+                { "data": "vendorAddress", "width ": "10%" },
+                { "data": "vendorPhone", "width ": "10%" },
+                { "data": "salesContactName", "width ": "10%" },
+                { "data": "salesContactEmail", "width ": "10%" },
+                { "data": "accountContactName", "width ": "10%" },
+                { "data": "accContactEmail", "width ": "10%" },
+                { "data": "registeredVendor", "width ": "10%" },
+
+
+
                 {
                     "data": "id",
                     "render": function (data) {
@@ -27,7 +37,7 @@ $(document).ready(function () {
                                 </a>
                             </div>
                            `;
-                    }, "width": "40%"
+                    }, "width": "10%"
                 }
             ]
         });
