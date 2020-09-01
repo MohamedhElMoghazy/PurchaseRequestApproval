@@ -32,6 +32,7 @@ namespace PurchaseRequestApproval.Models
         public String SalesContactName { get; set; } // The contact for sales
 
         [Display(Name = "Sales Contact Email")]
+        [Required]
         public String SalesContactEmail { get; set; } // The Sales Contact Email
 
         [Display(Name = "Accountant Contact Name")]
