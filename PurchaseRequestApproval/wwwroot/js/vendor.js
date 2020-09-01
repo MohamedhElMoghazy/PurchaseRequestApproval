@@ -20,7 +20,7 @@ $(document).ready(function () {
                 { "data": "salesContactEmail", "width ": "10%" },
                 { "data": "accountContactName", "width ": "10%" },
                 { "data": "accContactEmail", "width ": "10%" },
-                { "data": "registeredVendor", "width ": "10%" },
+                { "data": "regVendor", "width ": "10%" },
 
 
 
