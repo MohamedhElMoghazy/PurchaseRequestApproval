@@ -21,11 +21,13 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
 
             migrationBuilder.Sql(@"CREATE PROC usp_UpdateShipping
 	                                @Id int,
-	                                @Name varchar(100)
+	                                @ShippingName varchar(100),
+                                    @ShippingDescription varchar(100),
+                                    @ShippingACC varchar(100)
                                     AS 
                                     BEGIN 
                                      UPDATE dbo.Shippings
-                                     SET  Name = @Name
+                                     SET  ShippingName = @ShippingName, ShippingDescription = @ShippingDescription, ShippingACC = @ShippingACC
                                      WHERE  Id = @Id
                                     END");
 
@@ -38,11 +40,18 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
                                     END");
 
             migrationBuilder.Sql(@"CREATE PROC usp_CreateShipping
-                                   @Name varchar(100)
+                                   @ShippingName varchar(100),
+                                   @ShippingDescription varchar(100),
+                                   @ShippingACC varchar(100)
                                    AS 
                                    BEGIN 
-                                    INSERT INTO dbo.Shippings(Name)
-                                    VALUES (@Name)
+                                    INSERT INTO dbo.Shippings(
+                                    [ShippingName]
+                                    ,[ShippingDescription]
+                                    , [ShippingACC]
+                                    )
+                                    VALUES (@ShippingName,@ShippingDescription,@ShippingACC)
+                                  
                                    END");
 
         }

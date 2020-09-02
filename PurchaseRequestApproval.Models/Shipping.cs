@@ -15,7 +15,9 @@ namespace PurchaseRequestApproval.Models
         [Required]
         [MaxLength(50)]
         public string ShippingName { get; set; }
+        [Display(Name = "ShippingDescription")]
         public string ShippingDescription { get; set; }
+        [Display(Name = "ShippingACC")]
         public string ShippingACC { get; set; }
 
     }

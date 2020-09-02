@@ -21,11 +21,19 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
 
             migrationBuilder.Sql(@"CREATE PROC usp_UpdateEmployee
 	                                @Id int,
-	                                @Name varchar(100)
+	                                @EmployeeName varchar(100),
+                                    	@EmployeeCode  varchar(100),
+                                   	@EmployeePosition  varchar(100),
+					@EmployeePhone  varchar(100),
+                                    	@EmployeeEmail  varchar(100),
+                                   	@EmployeeSite varchar(100)	
+
+
+
                                     AS 
                                     BEGIN 
                                      UPDATE dbo.Employees
-                                     SET  Name = @Name
+                                     SET  EmployeeName = @EmployeeName, EmployeeCode = @EmployeeCode, EmployeePosition= @EmployeePosition,EmployeePhone  = @EmployeePhone ,EmployeeEmail = @EmployeeEmail
                                      WHERE  Id = @Id
                                     END");
 
@@ -38,11 +46,24 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
                                     END");
 
             migrationBuilder.Sql(@"CREATE PROC usp_CreateEmployee
-                                   @Name varchar(100)
+                                   @EmployeeName varchar(100),
+                                   @EmployeeCode varchar(100),
+                                   @EmployeePosition varchar(100),
+				   @EmployeePhone varchar(100),
+                                   @EmployeeEmail varchar(100),
+                                   @EmployeeSite varchar(100)	
                                    AS 
                                    BEGIN 
-                                    INSERT INTO dbo.Employees(Name)
-                                    VALUES (@Name)
+                                    INSERT INTO dbo.Employees(
+                                    [EmployeeName]
+                                    ,[EmployeeCode]
+                                    , [EmployeePosition]
+				    ,[EmployeePhone]
+                                    ,[EmployeeEmail]
+                                    , [EmployeeSite]
+                                    )
+                                    VALUES (@EmployeeName,@EmployeeCode,@EmployeePosition,@EmployeePhone,@EmployeeEmail,@EmployeeSite)
+                                  
                                    END");
 
         }

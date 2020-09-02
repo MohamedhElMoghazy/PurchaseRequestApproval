@@ -21,13 +21,32 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
 
             migrationBuilder.Sql(@"CREATE PROC usp_UpdateVendor
 	                                @Id int,
-	                                @Name varchar(100)
+                                    @VendorName varchar(100),
+                                    @VendoreCode varchar(100),
+                                    @VendorAddress varchar(100),
+                                    @VendorPhone varchar(100),
+                                    @SalesContactName varchar(100),
+                                    @SalesContactEmail varchar(100),
+                                    @AccountContactName varchar(100),
+                                    @AccContactEmail varchar(100),
+                                    @RegVendor bit	        
+
                                     AS 
                                     BEGIN 
-                                     UPDATE dbo.Vendors
-                                     SET  Name = @Name
-                                     WHERE  Id = @Id
+                                    UPDATE dbo.Vendors
+                                    SET  VendorName = @VendorName,
+                                    VendoreCode = @VendoreCode,
+                                    VendorAddress = @VendorAddress,
+                                    VendorPhone = @VendorPhone, 
+                                    SalesContactName = @SalesContactName,
+                                    SalesContactEmail = @SalesContactEmail, 
+                                    AccountContactName = @AccountContactName, 
+                                    AccContactEmail = @AccContactEmail,
+                                    RegVendor = @RegVendor
+                                    WHERE  Id = @Id
                                     END");
+
+
 
             migrationBuilder.Sql(@"CREATE PROC usp_DeleteVendor
 	                                @Id int
@@ -38,12 +57,40 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
                                     END");
 
             migrationBuilder.Sql(@"CREATE PROC usp_CreateVendor
-                                   @Name varchar(100)
+                                   @VendorName varchar(100),
+                                   @VendoreCode varchar(100),
+                                   @VendorAddress varchar(100),
+				                   @VendorPhone  varchar(100),
+                                   @SalesContactName varchar(100),
+                                   @SalesContactEmail varchar(100),
+				   				   @AccountContactName  varchar(100),
+                                   @AccContactEmail varchar(100),
+                                   @RegVendor bit
                                    AS 
                                    BEGIN 
-                                    INSERT INTO dbo.Vendors(Name)
-                                    VALUES (@Name)
-                                   END");
+                                    INSERT INTO dbo.Vendors(
+                                    [VendorName],
+                                    [VendoreCode], 
+                                    [VendorAddress],
+                                    [VendorPhone],
+                                    [SalesContactName], 
+                                    [SalesContactEmail],
+                                    [AccountContactName],
+                                    [AccContactEmail],
+                                    [RegVendor]
+                                    )
+                                    VALUES
+                                    (
+                                    @VendorName,
+                                    @VendoreCode,
+                                    @VendorAddress,
+                                    @VendorPhone,
+                                    @SalesContactName,
+                                    @SalesContactEmail,
+                                    @AccountContactName,
+                                    @AccContactEmail,
+                                    @RegVendor)
+                                    END");
 
 
         }
