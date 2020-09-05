@@ -33,7 +33,6 @@ namespace PurchaseRequestApproval.DataAccess.Repository
             {
                 sqlCon.Open();
                 sqlCon.Execute(procedureName, param, commandType: System.Data.CommandType.StoredProcedure);
-
             }
         }
 

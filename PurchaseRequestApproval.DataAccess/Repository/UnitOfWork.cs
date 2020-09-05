@@ -18,7 +18,9 @@ namespace PurchaseRequestApproval.DataAccess.Repository
             Vendor = new VendorRepository(_db);
             Employee = new EmployeeRepository(_db);
 
+            //SP_Call = new SP_Call(_db);
             SP_Call = new SP_Call(_db);
+
 
 
         }
@@ -30,9 +32,11 @@ namespace PurchaseRequestApproval.DataAccess.Repository
         public IEmployeeRepository Employee { get; private set; }
 
 
+        //public ISP_Call SP_Call { get; private set; }
         public ISP_Call SP_Call { get; private set; }
 
-        SP_Call IUnitOfWork.SP_Call => throw new NotImplementedException();
+
+        //SP_Call IUnitOfWork.SP_Call => throw new NotImplementedException();
 
         public void Dispose()
         {

@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using PurchaseRequestApproval.DataAccess.Repository.IRepository;
 using PurchaseRequestApproval.Models;
+using PurchaseRequestApproval.Utility;
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
@@ -34,7 +37,11 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
             }
             // this for edit request
-            purchaseType = _unitOfWork.PurchaseType.Get(id.GetValueOrDefault());
+            var parameter = new DynamicParameters(); // arrange parameters for sql server
+            parameter.Add("@Id", id); // arrange to send the Id
+            purchaseType = _unitOfWork.SP_Call.OneRecord<PurchaseType>(SD.Proc_PurchaseType_Get, parameter);
+
+
             if (purchaseType == null) 
             { return NotFound(); }
             return View(purchaseType);
@@ -48,16 +55,23 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         { 
             if (ModelState.IsValid)
             {
+
+                var parameter = new DynamicParameters();
+                parameter.Add("@PurcahseTypeName", purchaseType.PurcahseTypeName);
+                parameter.Add("@PurcahseCode", purchaseType.PurcahseCode);
+
                 if (purchaseType.Id==0) // create case whenever no ID posted
                 {
-                    _unitOfWork.PurchaseType.Add(purchaseType);
-                    
+                    //_unitOfWork.PurchaseType.Add(purchaseType);
+                    _unitOfWork.SP_Call.Execute(SD.Proc_PurchaseType_Create, parameter);
+
 
                 }
                 else
                 {
-                    _unitOfWork.PurchaseType.Update(purchaseType);
-                    
+                    parameter.Add("@Id", purchaseType.Id);
+                    _unitOfWork.SP_Call.Execute(SD.Proc_PurchaseType_Update , parameter);
+
                 }
                 _unitOfWork.Save();
                 return RedirectToAction(nameof(Index)); // if any mistake the name is gotted
@@ -76,7 +90,9 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         public IActionResult GetAll()
          {
 
-            var allObj = _unitOfWork.PurchaseType.GetAll();
+            // var allObj = _unitOfWork.PurchaseType.GetAll(); now commented to use the stored procedure
+            // var allObj = _unitOfWork.SP_Call.List<PurchaseType>(SD.Proc_PurchaseType_GetAll,null);
+            var allObj = _unitOfWork.SP_Call.List<PurchaseType>(SD.Proc_PurchaseType_GetAll, null);
             return Json(new { data = allObj });
 
 
@@ -93,12 +109,17 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var objFromDb = _unitOfWork.PurchaseType.Get(id);
+            var parameter = new DynamicParameters(); // arrange parameters for sql server
+            parameter.Add("@Id", id); // arrange to send the Id
+            var objFromDb = _unitOfWork.SP_Call.OneRecord<PurchaseType>(SD.Proc_PurchaseType_Get,parameter);
+            // var objFromDb = _unitOfWork.PurchaseType.Get(id); // to let using the sql server
             if (objFromDb == null)
             {
                 return Json(new { success = false, Message = "Error while deleting" });
             }
-            _unitOfWork.PurchaseType.Remove(objFromDb);
+            // _unitOfWork.PurchaseType.Remove(objFromDb); // Cmmented to trasfer to sql procedures
+            _unitOfWork.SP_Call.Execute(SD.Proc_PurchaseType_Delete, parameter); // Pass parameters to execute sql procedures
+
             _unitOfWork.Save();
             return Json(new { success = true, Message = "Delete Successful" });
 

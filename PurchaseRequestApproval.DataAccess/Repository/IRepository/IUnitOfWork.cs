@@ -11,7 +11,8 @@ namespace PurchaseRequestApproval.DataAccess.Repository.IRepository
 
         IVendorRepository Vendor { get; }
         IEmployeeRepository Employee { get; }
-        SP_Call SP_Call  { get; }
+        //SP_Call SP_Call  { get; }
+        ISP_Call SP_Call { get; }
         void Save();
 
     }

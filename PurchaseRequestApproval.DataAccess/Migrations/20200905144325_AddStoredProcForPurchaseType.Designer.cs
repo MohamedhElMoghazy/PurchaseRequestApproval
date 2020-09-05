@@ -10,7 +10,7 @@ using PurchaseRequestApproval.DataAccess.Data;
 namespace PurchaseRequestApproval.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200901053635_AddStoredProcForPurchaseType")]
+    [Migration("20200905144325_AddStoredProcForPurchaseType")]
     partial class AddStoredProcForPurchaseType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -316,6 +316,7 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("SalesContactEmail")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SalesContactName")

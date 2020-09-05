@@ -20,11 +20,11 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
                                     END ");
 
             migrationBuilder.Sql(@"CREATE PROC usp_UpdatePurchaseType
-	                                @Id int,
-	                                @PurcahseTypeName(100),
+	                                
+                                    @Id int,
+	                                @PurcahseTypeName varchar (100),
                                     @PurcahseCode varchar(100)
-
-
+                               
                                     AS 
                                     BEGIN 
                                      UPDATE dbo.PurchaseTypes
@@ -32,6 +32,7 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
 
                                      WHERE  Id = @Id
                                     END");
+
 
             migrationBuilder.Sql(@"CREATE PROC usp_DeletePurchaseType
 	                                @Id int
@@ -42,7 +43,7 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
                                     END");
 
             migrationBuilder.Sql(@"CREATE PROC usp_CreatePurchaseType
-                                   @PurcahseTypeName(100),
+                                   @PurcahseTypeName varchar (100),
                                    @PurcahseCode varchar(100)
                                    AS 
                                    BEGIN 
@@ -53,7 +54,7 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
 
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
+        protected  override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(@"DROP PROCEDURE usp_GetCoverTypes");
             migrationBuilder.Sql(@"DROP PROCEDURE usp_GetCoverType");
