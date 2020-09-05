@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using PurchaseRequestApproval.DataAccess.Repository.IRepository;
 using PurchaseRequestApproval.Models;
+using PurchaseRequestApproval.Utility;
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
@@ -34,7 +36,15 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
             }
             // this for edit request
-            vendor = _unitOfWork.Vendor.Get(id.GetValueOrDefault());
+            // vendor = _unitOfWork.Vendor.Get(id.GetValueOrDefault());
+
+            var parameter = new DynamicParameters(); // arrange parameters for sql server
+            parameter.Add("@Id", id); // arrange to send the Id
+
+            //var objFromDb = _unitOfWork.Vendor.Get(id);
+
+            vendor = _unitOfWork.SP_Call.OneRecord<Vendor>(SD.Proc_Vendor_Get, parameter);
+
             if (vendor == null) 
             { return NotFound(); }
             return View(vendor);
@@ -48,16 +58,31 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         { 
             if (ModelState.IsValid)
             {
+
+                // to pass parameters to sql procedrues
+                var parameter = new DynamicParameters();
+                parameter.Add("@VendorName ", vendor.VendorName);
+                parameter.Add("@VendoreCode", vendor.VendoreCode);
+                parameter.Add("@VendorAddress", vendor.VendorAddress);
+                parameter.Add("@VendorPhone", vendor.VendorPhone);
+                parameter.Add("@SalesContactName", vendor.SalesContactName);
+                parameter.Add("@SalesContactEmail", vendor.SalesContactEmail);
+                parameter.Add("@AccountContactName",vendor.AccountContactName);
+                parameter.Add("@AccContactEmail", vendor.AccContactEmail);
+                parameter.Add("@RegVendor", vendor.RegVendor);
+
                 if (vendor.Id==0) // create case whenever no ID posted
                 {
-                    _unitOfWork.Vendor.Add(vendor);
-                    
+                    //_unitOfWork.Vendor.Add(vendor);
+                 _unitOfWork.SP_Call.Execute(SD.Proc_Vendor_Create, parameter);
 
                 }
                 else
                 {
-                    _unitOfWork.Vendor.Update(vendor);
-                    
+                    //_unitOfWork.Vendor.Update(vendor);
+                    parameter.Add("@Id", vendor.Id);
+                    _unitOfWork.SP_Call.Execute(SD.Proc_Vendor_Update, parameter);
+
                 }
                 _unitOfWork.Save();
                 return RedirectToAction(nameof(Index)); // if any mistake the name is gotted
@@ -76,7 +101,9 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         public IActionResult GetAll()
          {
 
-            var allObj = _unitOfWork.Vendor.GetAll();
+            // var allObj = _unitOfWork.Vendor.GetAll();
+
+            var allObj = _unitOfWork.SP_Call.List<Vendor>(SD.Proc_Vendor_GetAll, null); // to allow stored procedure
             return Json(new { data = allObj });
 
 
@@ -93,12 +120,20 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var objFromDb = _unitOfWork.Vendor.Get(id);
+
+            var parameter = new DynamicParameters(); // arrange parameters for sql server
+            parameter.Add("@Id", id); // arrange to send the Id
+
+            //var objFromDb = _unitOfWork.Vendor.Get(id);
+
+            var objFromDb = _unitOfWork.SP_Call.OneRecord<Vendor>(SD.Proc_Vendor_Get, parameter);
             if (objFromDb == null)
             {
                 return Json(new { success = false, Message = "Error while deleting" });
             }
-            _unitOfWork.Vendor.Remove(objFromDb);
+            //_unitOfWork.Vendor.Remove(objFromDb);
+
+            _unitOfWork.SP_Call.Execute(SD.Proc_Vendor_Delete, parameter); // Pass parameters to execute sql procedures
             _unitOfWork.Save();
             return Json(new { success = true, Message = "Delete Successful" });
 

@@ -61,6 +61,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         { 
             if (ModelState.IsValid)
             {
+                // to pass parameters to sql procedrues
                 var parameter = new DynamicParameters();
                 parameter.Add("@EmployeeName", employee.EmployeeName);
                 parameter.Add("@EmployeeCode", employee.EmployeePosition);
