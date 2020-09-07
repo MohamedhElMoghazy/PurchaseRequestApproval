@@ -20,6 +20,13 @@ namespace PurchaseRequestApproval.DataAccess.Data
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Employee> Employees { get; set; }
 
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<VendorContact> VendorContacts { get; set; }
+        public DbSet<PRApproval> PRApprovals { get; set; }
+        public DbSet<Quote> Quotes { get; set; }
+        public DbSet<PRAQuote> PRAQuotes { get; set; }
+
+
 
     }
 }
