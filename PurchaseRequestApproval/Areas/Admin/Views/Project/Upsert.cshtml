@@ -1,0 +1,80 @@
+﻿<!--Adding or linking the model to the view -->
+@model PurchaseRequestApproval.Models.Project
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Project";
+}
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class=" text-danger"></div>
+        @if (Model.Id != 0)
+        {
+            // edit
+            title = "Edit Project Type";
+
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="ProjectName"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="ProjectName" class=" form-control" />
+                    <span asp-validation-for="ProjectName" class=" text-danger"></span>
+                </div>
+            </div>
+
+            <!--ProjectDescription-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="WorkPackageIn"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="WorkPackageIn" class=" form-control" />
+                    <span asp-validation-for="WorkPackageIn" class=" text-danger"></span>
+                </div>
+            </div>
+
+            <!--Adding ProjectDescription -->
+            <!--Adding ProjectACC-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="ContractNo"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="ContractNo" class=" form-control" />
+                    <span asp-validation-for="ContractNo" class=" text-danger"></span>
+                </div>
+            </div>
+
+            <!--Adding ProjectACC -->
+
+
+
+
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Id != 0)
+                    {
+                        <partial name="_EditAndBackToListButton" model="Model.Id" />
+
+                    }
+                    else
+                    {
+                        <partial name="_CreateAndBackToListButton" />
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}

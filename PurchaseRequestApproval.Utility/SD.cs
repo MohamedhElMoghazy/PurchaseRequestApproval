@@ -33,7 +33,15 @@ namespace PurchaseRequestApproval.Utility
         public const string Proc_Vendor_GetAll = "usp_GetVendors";
         public const string Proc_Vendor_Update = "usp_UpdateVendor";
         public const string Proc_Vendor_Delete = "usp_DeleteVendor";
-        
+
+
+        /* Constant for Project  */
+        public const string Proc_Project_Create = "usp_CreateProject";
+        public const string Proc_Project_Get = "usp_GetProject";
+        public const string Proc_Project_GetAll = "usp_GetProjects";
+        public const string Proc_Project_Update = "usp_UpdateProject";
+        public const string Proc_Project_Delete = "usp_DeleteProject";
+
 
 
     }
