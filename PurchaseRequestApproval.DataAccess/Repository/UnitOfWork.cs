@@ -18,6 +18,12 @@ namespace PurchaseRequestApproval.DataAccess.Repository
             Vendor = new VendorRepository(_db);
             Employee = new EmployeeRepository(_db);
 
+            PRApproval = new PRApprovalRepository(_db);
+            PRAQuote = new PRAQuoteRepository(_db);
+            Project= new ProjectRepository(_db);
+            Quote = new QuoteRepository(_db);
+            VendorContact = new VendorContactRepository(_db);
+   
             //SP_Call = new SP_Call(_db);
             SP_Call = new SP_Call(_db);
 
@@ -30,6 +36,13 @@ namespace PurchaseRequestApproval.DataAccess.Repository
 
         public IVendorRepository Vendor { get; private set; }
         public IEmployeeRepository Employee { get; private set; }
+
+        public IPRApprovalRepository PRApproval { get; private set; }
+        public IPRAQuoteRepository PRAQuote { get; private set; }
+        public IProjectRepository Project { get; private set; }
+        public IQuoteRepository Quote { get; private set; }
+        public IVendorContactRepository VendorContact { get; private set; }
+
 
 
         //public ISP_Call SP_Call { get; private set; }
