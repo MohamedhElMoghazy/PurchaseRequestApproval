@@ -10,10 +10,10 @@
 <br />
 <div class="row">
     <div class="col-6">
-        <h2 class="text-primary">Employee </h2>
+        <h2 class="text-primary">Purchase Request Approval </h2>
     </div>
     <div class="col-6 text-right">
-        <a class="btn btn-primary" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create Employee</a>
+        <a class="btn btn-primary" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create Purchase Request Approval</a>
     </div>
 </div>
 
@@ -23,12 +23,14 @@
         <thead class="thead-dark">
             <tr class="table-info">
 
-                <th>Employee Name</th>
-                <th>Employee Code</th>
-                <th>Employee Position</th>
-                <th>Employee Phone</th>
-                <th>Employee Email</th>
-                <th>EmployeeSite</th>
+                <th>PRApproval Id</th>
+                <th>PR Approval Title</th>
+                <th>PR Approval Description</th>
+                <th>Work Order</th>
+                <th>Vendor</th>
+                <th>Purchase Type</th>
+                <th>Sourced By</th>
+                <th>Project </th>
 
 
 
@@ -43,7 +45,6 @@
 
 @section Scripts {
 
-    <script src="~/js/employee.js"></script>
-
+    <script src="~/js/prapproval.js"></script>
 }
 

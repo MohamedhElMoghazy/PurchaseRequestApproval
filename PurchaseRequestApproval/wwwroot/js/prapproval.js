@@ -13,12 +13,14 @@ $(document).ready(function () {
 
             "columns": [
 
-                { "data": "employeeName", "width ": "15%" },
-                { "data": "employeeCode", "width ": "15%" },
-                { "data": "employeePosition", "width ": "15%" },
-                { "data": "employeePhone", "width ": "15%" },
-                { "data": "employeeEmail", "width ": "15%" },
-                { "data": "employeeSite", "width ": "15%" },
+                { "data": "pRApprovald", "width ": "11.25%" },
+                { "data": "pRApprovalTitle", "width ": "11.25%" },
+                { "data": "pRApprovalDescription", "width ": "11.25%" },
+                { "data": "workOrder", "width ": "11.25%" },
+                { "data": "vendor.VendorName", "width ": "11.25%" },
+                { "data": "purchaseType.PurcahseTypeName", "width ": "11.25%" },
+                { "data": "employee.EmployeeName", "width ": "11.25%" },
+                { "data": "project.ProjectName", "width ": "11.25%" },
 
 
 

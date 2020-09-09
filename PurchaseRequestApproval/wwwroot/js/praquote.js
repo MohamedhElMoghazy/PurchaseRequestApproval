@@ -13,12 +13,12 @@ $(document).ready(function () {
 
             "columns": [
 
-                { "data": "employeeName", "width ": "15%" },
-                { "data": "employeeCode", "width ": "15%" },
-                { "data": "employeePosition", "width ": "15%" },
-                { "data": "employeePhone", "width ": "15%" },
-                { "data": "employeeEmail", "width ": "15%" },
-                { "data": "employeeSite", "width ": "15%" },
+                { "data": "pRApproval.PRApprovalId", "width ": "15%" },
+                { "data": "pRAQuoteDate", "width ": "15%" },
+                { "data": "estimatedPrice", "width ": "15%" },
+                { "data": "pRARevision", "width ": "15%" },
+                { "data": "employee.EmployeeName", "width ": "15%" },
+                { "data": "quote.QuoteDescription", "width ": "15%" },
 
 
 

@@ -35,7 +35,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
             {
                 PRApprovalList = _unitOfWork.PRApproval.GetAll().Select(i => new SelectListItem
                 {
-                    Text = i.PRApprovalTitle,
+                    Text = i.PRApprovalId.ToString(),
                     Value = i.Id.ToString()
 
                 }),
