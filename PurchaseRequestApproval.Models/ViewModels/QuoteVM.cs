@@ -9,7 +9,7 @@ namespace PurchaseRequestApproval.Models.ViewModels
     {
         public Quote Quote { get; set; }
         public IEnumerable<SelectListItem> VendorList { get; set; }
-        public IEnumerable<SelectListItem> VendorContactIdList { get; set; }
+        public IEnumerable<SelectListItem> VendorContactList { get; set; }
         public IEnumerable<SelectListItem> ShippingList { get; set; }
         
 

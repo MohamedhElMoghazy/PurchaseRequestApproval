@@ -9,6 +9,8 @@ using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using PurchaseRequestApproval.DataAccess.Repository.IRepository;
 using PurchaseRequestApproval.Models;
 using PurchaseRequestApproval.Utility;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using PurchaseRequestApproval.Models.ViewModels;
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
@@ -29,31 +31,67 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         // create an method for upsert and can get null Id in case of create 
         public IActionResult Upsert(int? id)
         {
-            PRApproval prapproval = new PRApproval();
+            PRApprovalVM prapprovalVM = new PRApprovalVM() 
+            {
+                PRApproval = new PRApproval(),
+                EmployeeList = _unitOfWork.Employee.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.EmployeeName,
+                    Value = i.Id.ToString()
+
+                }),
+
+                VendorList = _unitOfWork.Vendor.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.VendorName,
+                    Value = i.Id.ToString()
+
+                }),
+
+                PurchaseTypeList = _unitOfWork.PurchaseType.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.PurcahseTypeName,
+                    Value = i.Id.ToString()
+
+                }),
+
+                ProjectList = _unitOfWork.Project.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.ProjectName,
+                    Value = i.Id.ToString()
+
+                }),
+
+
+
+
+
+
+            };
             if (id ==null) // create case
             {
-                return View(prapproval);
+                return View(prapprovalVM);
 
             }
             // this for edit request
-            // prapproval = _unitOfWork.PRApproval.Get(id.GetValueOrDefault()); // To add stored procedure
+            prapprovalVM.PRApproval = _unitOfWork.PRApproval.Get(id.GetValueOrDefault()); // To add stored procedure
 
-            var parameter = new DynamicParameters(); // arrange parameters for sql server
-            parameter.Add("@Id", id); // arrange to send the Id
+           // var parameter = new DynamicParameters(); // arrange parameters for sql server
+            //parameter.Add("@Id", id); // arrange to send the Id
 
             // var objFromDb = _unitOfWork.PRApproval.Get(id);
 
-            prapproval = _unitOfWork.SP_Call.OneRecord<PRApproval>(SD.Proc_PRApproval_Get, parameter);
+            //prapproval = _unitOfWork.SP_Call.OneRecord<PRApproval>(SD.Proc_PRApproval_Get, parameter);
 
 
 
 
-            if (prapproval == null) 
+            if (prapprovalVM.PRApproval == null) 
             { return NotFound(); }
-            return View(prapproval);
+            return View(prapprovalVM);
          //   return View();
         }
-
+        /*
         // To define a post action method 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -103,7 +141,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         
         
         }
-
+        */
 
 
         #region API CALLS
@@ -112,9 +150,9 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         public IActionResult GetAll()
          {
 
-            // var allObj = _unitOfWork.PRApproval.GetAll(); // commented to allow the link to procedures
+           var allObj = _unitOfWork.PRApproval.GetAll(includeProperties: "Employee,Vendor,PurchaseType,Project"); // commented to allow the link to procedures
 
-            var allObj = _unitOfWork.SP_Call.List<PRApproval>(SD.Proc_PRApproval_GetAll, null); // to allow stored procedure
+           // var allObj = _unitOfWork.SP_Call.List<PRApproval>(SD.Proc_PRApproval_GetAll, null); // to allow stored procedure
             return Json(new { data = allObj });
 
 
@@ -134,17 +172,17 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
             var parameter = new DynamicParameters(); // arrange parameters for sql server
             parameter.Add("@Id", id); // arrange to send the Id
 
-            // var objFromDb = _unitOfWork.PRApproval.Get(id);
+             var objFromDb = _unitOfWork.PRApproval.Get(id);
 
-            var objFromDb = _unitOfWork.SP_Call.OneRecord<PRApproval>(SD.Proc_PRApproval_Get, parameter);
+           // var objFromDb = _unitOfWork.SP_Call.OneRecord<PRApproval>(SD.Proc_PRApproval_Get, parameter);
 
             if (objFromDb == null)
             {
                 return Json(new { success = false, Message = "Error while deleting" });
             }
-            // _unitOfWork.PRApproval.Remove(objFromDb);
+             _unitOfWork.PRApproval.Remove(objFromDb);
 
-            _unitOfWork.SP_Call.Execute(SD.Proc_PRApproval_Delete, parameter); // Pass parameters to execute sql procedures
+           // _unitOfWork.SP_Call.Execute(SD.Proc_PRApproval_Delete, parameter); // Pass parameters to execute sql procedures
 
             _unitOfWork.Save();
             return Json(new { success = true, Message = "Delete Successful" });

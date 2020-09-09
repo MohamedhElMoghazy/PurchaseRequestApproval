@@ -9,6 +9,8 @@ using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using PurchaseRequestApproval.DataAccess.Repository.IRepository;
 using PurchaseRequestApproval.Models;
 using PurchaseRequestApproval.Utility;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using PurchaseRequestApproval.Models.ViewModels;
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
@@ -29,30 +31,78 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         // create an method for upsert and can get null Id in case of create 
         public IActionResult Upsert(int? id)
         {
-            PRAQuote praquote = new PRAQuote();
+            PRAQuoteVM praquoteVM = new PRAQuoteVM() 
+            {
+                PRApprovalList = _unitOfWork.PRApproval.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.PRApprovalTitle,
+                    Value = i.Id.ToString()
+
+                }),
+
+                EmployeeList = _unitOfWork.Employee.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.EmployeeName,
+                    Value = i.Id.ToString()
+
+                }),
+
+                QuoteList = _unitOfWork.Quote.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.QuoteDescription,
+                    Value = i.Id.ToString()
+
+                }),
+
+                QuoteList1 = _unitOfWork.Quote.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.QuoteDescription,
+                    Value = i.Id.ToString()
+
+                }),
+
+                QuoteList2 = _unitOfWork.Quote.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.QuoteDescription,
+                    Value = i.Id.ToString()
+
+                })
+
+
+
+
+
+
+
+
+
+
+            };
             if (id ==null) // create case
             {
-                return View(praquote);
+                return View(praquoteVM);
 
             }
             // this for edit request
-            // praquote = _unitOfWork.PRAQuote.Get(id.GetValueOrDefault()); // To add stored procedure
+             praquoteVM.PRAQuote = _unitOfWork.PRAQuote.Get(id.GetValueOrDefault()); // To add stored procedure
 
-            var parameter = new DynamicParameters(); // arrange parameters for sql server
-            parameter.Add("@Id", id); // arrange to send the Id
+           // var parameter = new DynamicParameters(); // arrange parameters for sql server
+            //parameter.Add("@Id", id); // arrange to send the Id
 
             // var objFromDb = _unitOfWork.PRAQuote.Get(id);
 
-            praquote = _unitOfWork.SP_Call.OneRecord<PRAQuote>(SD.Proc_PRAQuote_Get, parameter);
+            //praquote = _unitOfWork.SP_Call.OneRecord<PRAQuote>(SD.Proc_PRAQuote_Get, parameter);
 
 
 
 
-            if (praquote == null) 
+            if (praquoteVM.PRAQuote == null) 
             { return NotFound(); }
-            return View(praquote);
+            return View(praquoteVM);
          //   return View();
         }
+
+        /*
 
         // To define a post action method 
         [HttpPost]
@@ -117,7 +167,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         
         }
 
-
+            */
 
         #region API CALLS
 
@@ -125,9 +175,9 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         public IActionResult GetAll()
          {
 
-            // var allObj = _unitOfWork.PRAQuote.GetAll(); // commented to allow the link to procedures
+            var allObj = _unitOfWork.PRAQuote.GetAll(includeProperties: "PRApproval,Employee,Quote,Quote1,Quote2"); // commented to allow the link to procedures
 
-            var allObj = _unitOfWork.SP_Call.List<PRAQuote>(SD.Proc_PRAQuote_GetAll, null); // to allow stored procedure
+           // var allObj = _unitOfWork.SP_Call.List<PRAQuote>(SD.Proc_PRAQuote_GetAll, null); // to allow stored procedure
             return Json(new { data = allObj });
 
 
@@ -147,17 +197,17 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
             var parameter = new DynamicParameters(); // arrange parameters for sql server
             parameter.Add("@Id", id); // arrange to send the Id
 
-            // var objFromDb = _unitOfWork.PRAQuote.Get(id);
+             var objFromDb = _unitOfWork.PRAQuote.Get(id);
 
-            var objFromDb = _unitOfWork.SP_Call.OneRecord<PRAQuote>(SD.Proc_PRAQuote_Get, parameter);
+           // var objFromDb = _unitOfWork.SP_Call.OneRecord<PRAQuote>(SD.Proc_PRAQuote_Get, parameter);
 
             if (objFromDb == null)
             {
                 return Json(new { success = false, Message = "Error while deleting" });
             }
-            // _unitOfWork.PRAQuote.Remove(objFromDb);
+             _unitOfWork.PRAQuote.Remove(objFromDb);
 
-            _unitOfWork.SP_Call.Execute(SD.Proc_PRAQuote_Delete, parameter); // Pass parameters to execute sql procedures
+            //_unitOfWork.SP_Call.Execute(SD.Proc_PRAQuote_Delete, parameter); // Pass parameters to execute sql procedures
 
             _unitOfWork.Save();
             return Json(new { success = true, Message = "Delete Successful" });
