@@ -174,8 +174,8 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
          {
-
-            var allObj = _unitOfWork.PRAQuote.GetAll(includeProperties: "PRApproval,Employee,Quote,Quote1,Quote2"); // commented to allow the link to procedures
+            // Quote1 and Quote 2 has been removed from including properties to avoid the errors
+            var allObj = _unitOfWork.PRAQuote.GetAll(includeProperties: "PRApproval,Employee,Quote"); // commented to allow the link to procedures
 
            // var allObj = _unitOfWork.SP_Call.List<PRAQuote>(SD.Proc_PRAQuote_GetAll, null); // to allow stored procedure
             return Json(new { data = allObj });
