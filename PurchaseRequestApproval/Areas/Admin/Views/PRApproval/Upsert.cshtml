@@ -1,0 +1,334 @@
+﻿<!--Adding or linking the model to the view -->
+@model PurchaseRequestApproval.Models.ViewModels.PRApprovalVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Add Purchase Approval";
+}
+
+<form method="post" >
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class=" text-danger"></div>
+        @if (Model.PRApproval.Id != 0)
+        {
+            // edit
+            title = "Edit Purchase Request Approval";
+            <input type="hidden" asp-for="PRApproval.Id" />
+
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.PRApprovalId"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.PRApprovalId" class=" form-control" />
+                    @*<textarea asp-for="PRApproval.PRApprovalId" class="form-control"></textarea>*@
+                    <span asp-validation-for="PRApproval.PRApprovalId" class=" text-danger"></span>
+                </div>
+            </div>
+
+            <!--Adding PRApprovalTitle-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.PRApprovalTitle"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.PRApprovalTitle" class=" form-control" />
+
+
+                </div>
+            </div>
+
+            <!--Adding PRApprovalTitle  -->
+            <!--Adding PRApprovalDescription-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.PRApprovalDescription"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="PRApproval.PRApprovalDescription" class="form-control"></textarea>
+                    @*<input asp-for="PRApproval.PRApprovalDescription" class=" form-control" />*@
+
+
+                </div>
+            </div>
+
+            <!--Adding PRApprovalDescription  -->
+            <!--Adding WorkOrder-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.WorkOrder"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.WorkOrder" class=" form-control" />
+                    <span asp-validation-for="PRApproval.WorkOrder" class=" text-danger"></span>
+
+
+                </div>
+            </div>
+
+            <!--Adding WorkOrder-->
+            <!--Adding CMOA-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.CMOA"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.CMOA" class=" form-control" />
+                    <span asp-validation-for="PRApproval.CMOA" class=" text-danger"></span>
+
+
+                </div>
+            </div>
+
+            <!--Adding CMOA-->
+            <!--Adding MatCorVer-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.MatCorVer"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.MatCorVer" class=" form-control" />
+                    <span asp-validation-for="PRApproval.MatCorVer" class=" text-danger"></span>
+
+
+                </div>
+            </div>
+
+            <!--Adding MatCorVer-->
+            <!--Adding Warranty-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.Warranty"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.Warranty" class=" form-control" />
+                    <span asp-validation-for="PRApproval.Warranty" class=" text-danger"></span>
+
+
+                </div>
+            </div>
+
+            <!--Adding Warranty-->
+            <!--Adding WorkDurationSiteDays-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.WorkDurationSiteDays"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.WorkDurationSiteDays" class=" form-control" />
+                    <span asp-validation-for="PRApproval.WorkDurationSiteDays" class=" text-danger"></span>
+
+
+                </div>
+            </div>
+
+            <!--Adding WorkDurationSiteDays-->
+            <!--Adding RateSheet-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.RateSheet"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.RateSheet" class=" form-control" />
+                    <span asp-validation-for="PRApproval.RateSheet" class=" text-danger"></span>
+
+
+                </div>
+            </div>
+
+            <!--Adding RateSheet-->
+            <!--Adding GateAccess-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.GateAccess"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.GateAccess" class=" form-control" />
+                    <span asp-validation-for="PRApproval.GateAccess" class=" text-danger"></span>
+
+
+                </div>
+            </div>
+
+            <!--Adding GateAccess-->
+            <!--Adding RentalPeriodDays-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.RentalPeriodDays"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.RentalPeriodDays" class=" form-control" />
+                    <span asp-validation-for="PRApproval.RentalPeriodDays" class=" text-danger"></span>
+
+
+                </div>
+            </div>
+
+            <!--Adding RentalPeriodDays-->
+            <!--Adding EquipmentTireEngine-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.EquipmentTireEngine"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.EquipmentTireEngine" class=" form-control" />
+                    <span asp-validation-for="PRApproval.EquipmentTireEngine" class=" text-danger"></span>
+
+
+                </div>
+            </div>
+
+            <!--Adding EquipmentTireEngine-->
+            <!--Adding JustificationVendor-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PRApproval.JustificationVendor"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="PRApproval.JustificationVendor" class=" form-control" />
+                    <span asp-validation-for="PRApproval.JustificationVendor" class=" text-danger"></span>
+
+
+                </div>
+            </div>
+
+            <!--Adding JustificationVendor-->
+            <!--Adding Contact Vendor-->
+            <div class="form-group row">
+                <div class="col-4">
+                    Vendor
+
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.PRApproval.VendorId, Model.VendorList, "Select a Vendor", new { @class = "form-control" })
+                    <span asp-validation-for="PRApproval.VendorId" class=" text-danger"></span>
+
+                </div>
+            </div>
+
+            <!--Adding Contact Vendor -->
+            <!--Adding PurchaseType-->
+            <div class="form-group row">
+                <div class="col-4">
+                    Purchase Type
+
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.PRApproval.PurchaseTypeId, Model.PurchaseTypeList, " Select a Purchase Type", new { @class = "form-control" })
+                    <span asp-validation-for="PRApproval.PurchaseTypeId" class=" text-danger"></span>
+
+                </div>
+            </div>
+
+            <!--Adding PurchaseTypeId -->
+            <!--Adding SourcedBy-->
+            <div class="form-group row">
+                <div class="col-4">
+                    Sourced By
+
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.PRApproval.SourcedBy, Model.EmployeeList, " Select Sourced By", new { @class = "form-control" })
+                    <span asp-validation-for="PRApproval.SourcedBy" class=" text-danger"></span>
+
+                </div>
+            </div>
+
+            <!--Adding Contact SourcedBy -->
+            <!--Adding Project-->
+            <div class="form-group row">
+                <div class="col-4">
+                    Project
+
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.PRApproval.ProjectId, Model.ProjectList, " Select Project", new { @class = "form-control" })
+                    <span asp-validation-for="PRApproval.ProjectId" class=" text-danger"></span>
+
+                </div>
+            </div>
+
+            <!--Adding Project -->
+
+
+
+
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.PRApproval.Id != 0)
+                    {
+                        <partial name="_EditAndBackToListButton" model="Model.PRApproval.Id" />
+
+                    }
+                    else
+                    {
+                        <div class=" row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                                @*<button type="submit"class="btn btn-primary form-control">Create</button>*@
+
+                            </div>
+
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+
+                            </div>
+
+
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="https://cdn.tiny.cloud/1/3dc91asmih4y7q0yz0bynzsiux4qvh5nk8b6tzfdjgsagd56/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+     tinymce.init({
+         selector: 'textarea',
+         plugins: 'lists ',
+         menubar:'file edit format'
+         //// toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+         //toolbar_mode: 'floating',
+         //tinycomments_mode: 'embedded',
+         //tinycomments_author: 'Author name',
+     });
+
+       @*
+                 tinymce.init({
+                     selector: 'textarea',
+                     plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+                     toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+                     toolbar_mode: 'floating',
+                     tinycomments_mode: 'embedded',
+                     tinycomments_author: 'Author name',
+                 });
+       *@
+
+
+     // incase we need to do validation on the screen
+     function validateInput()
+     {
+         //if (document.getElementById("uploadBox").value = "") {
+         //    swal("Error", "Please Select an PDF file", "error")
+         //    return false;
+
+         //}
+         //return true;
+
+
+
+     }
+    </script>
+
+}
