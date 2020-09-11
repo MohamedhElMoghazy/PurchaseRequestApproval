@@ -33,6 +33,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         {
             PRAQuoteVM praquoteVM = new PRAQuoteVM() 
             {
+                PRAQuote = new PRAQuote(),
                 PRApprovalList = _unitOfWork.PRApproval.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.PRApprovalId.ToString(),

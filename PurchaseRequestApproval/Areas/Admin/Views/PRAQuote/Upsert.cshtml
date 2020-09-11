@@ -290,7 +290,7 @@
 
                 </div>
                 <div class="col-8">
-                    @Html.DropDownListFor(m => m.PRAQuote.QuoteAl1Id, Model.QuoteList, "Select a Main Quote", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.PRAQuote.QuoteAl1Id, Model.QuoteList, "Select Alternative Quote 1", new { @class = "form-control" })
                     <span asp-validation-for="PRAQuote.QuoteAl1Id" class=" text-danger"></span>
 
                 </div>
@@ -304,7 +304,7 @@
 
                 </div>
                 <div class="col-8">
-                    @Html.DropDownListFor(m => m.PRAQuote.QuoteAl2Id, Model.QuoteList, "Select a Main Quote", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.PRAQuote.QuoteAl2Id, Model.QuoteList, "Select Alternative Quote 2", new { @class = "form-control" })
                     <span asp-validation-for="PRAQuote.QuoteAl2Id" class=" text-danger"></span>
 
                 </div>
