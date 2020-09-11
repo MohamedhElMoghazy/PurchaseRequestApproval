@@ -1,0 +1,321 @@
+﻿<!--Adding or linking the model to the view -->
+@model PurchaseRequestApproval.Models.ViewModels.QuoteVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Add Quote";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class=" text-danger"></div>
+        @if (Model.Quote.Id != 0)
+        {
+            // edit
+            title = "Edit Quote";
+            <input type="hidden" asp-for="Quote.Id" />
+
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.QuoteDescription"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.QuoteDescription" class=" form-control" />
+                    @*<textarea asp-for="Quote.QuoteDescription" class="form-control"></textarea>*@
+                    <span asp-validation-for="Quote.QuoteDescription" class=" text-danger"></span>
+                </div>
+            </div>
+
+            <!--Adding QuoteDate-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.QuoteDate"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.QuoteDate" class=" form-control" />
+
+
+                </div>
+            </div>
+
+            <!--Adding QuoteDate  -->
+            <!--Adding Quote Amount-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.QuoteAmount"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.QuoteAmount" class=" form-control" />
+                    <span asp-validation-for="Quote.QuoteAmount" class=" text-danger"></span>
+
+                </div>
+            </div>
+
+            <!--Adding Quote Amount -->
+            <!--Adding SiteCompliant Phone-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.SiteCompliant"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.SiteCompliant" class=" form-control" />
+
+                </div>
+            </div>
+
+            <!--Adding CSiteCompliant -->
+            <!--Adding Less 3K-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.Less3K"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.Less3K" class=" form-control" />
+
+
+                </div>
+            </div>
+
+            <!--Adding Less 3K -->
+            <!--Adding SoleProvider-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.SoleProvider"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.SoleProvider" class=" form-control" />
+
+
+                </div>
+            </div>
+
+            <!--Adding SoleProvider  -->
+            <!--Adding OEM-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.OEM"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.OEM" class=" form-control" />
+
+
+                </div>
+            </div>
+
+            <!--Adding OEM  -->
+            <!--Adding Schedule Driven Purchase-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.ScheduleDrivenPur"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.ScheduleDrivenPur" class=" form-control" />
+
+
+                </div>
+            </div>
+
+            <!--Adding Schedule Driven Purchase  -->
+            <!--Adding  Commonality-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.Commonality"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.Commonality" class=" form-control" />
+
+
+                </div>
+            </div>
+
+            <!--Adding  Commonality  -->
+            <!--Adding FirstNation-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.FirstNation"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.FirstNation" class=" form-control" />
+
+
+                </div>
+            </div>
+
+            <!--Adding FirstNation  -->
+            <!--Adding Metis-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.Metis"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.Metis" class=" form-control" />
+
+
+                </div>
+            </div>
+
+            <!--Adding Metis  -->
+            <!--Adding LocalVendor-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.LocalVendor"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.LocalVendor" class=" form-control" />
+
+
+                </div>
+            </div>
+
+            <!--Adding LocalVendor  -->
+            <!--Adding ETADays-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Quote.ETADays"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Quote.ETADays" class=" form-control" />
+
+
+                </div>
+            </div>
+
+            <!--Adding ETADays  -->
+            <!--Adding PdfUrl-->
+                <div class="form-group row">
+                    <div class="col-4">
+                        QuotePDF 
+
+                    </div>
+                    <div class="col-8">
+                       <input type="file" name="files" id="uploadBox" multiple class="form-control"/>
+
+                    </div>
+                </div>
+
+            <!--Adding PdfUrl  -->
+            <!--Adding Contact Vendor-->
+            <div class="form-group row">
+                <div class="col-4">
+                    Vendor
+
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Quote.VendorId, Model.VendorList, "Select a Vendor", new { @class = "form-control" })
+                    <span asp-validation-for="Quote.VendorId" class=" text-danger"></span>
+
+                </div>
+            </div>
+
+            <!--Adding Contact Vendor -->
+            <!--Adding Vendor Contact-->
+            <div class="form-group row">
+                <div class="col-4">
+                    VendorContact
+
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Quote.VendorContactId, Model.VendorContactList, " Select a Vendor Contact", new { @class = "form-control" })
+                    <span asp-validation-for="Quote.VendorContactId" class=" text-danger"></span>
+
+                </div>
+            </div>
+
+            <!--Adding Contact Vendor Contact -->
+            <!--Adding Shipping-->
+            <div class="form-group row">
+                <div class="col-4">
+                    VendorContact
+
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Quote.ShippingId, Model.ShippingList, " Select a Shipping Method", new { @class = "form-control" })
+                    <span asp-validation-for="Quote.ShippingId" class=" text-danger"></span>
+
+                </div>
+            </div>
+
+            <!--Adding Contact ShippingId -->
+
+
+
+
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Quote.Id != 0)
+                    {
+                        <partial name="_EditAndBackToListButton" model="Model.Quote.Id" />
+
+                    }
+                    else
+                    {
+                        <div class=" row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                                @*<button type="submit"class="btn btn-primary form-control">Create</button>*@
+
+                            </div>
+
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+
+                            </div>
+
+
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="https://cdn.tiny.cloud/1/3dc91asmih4y7q0yz0bynzsiux4qvh5nk8b6tzfdjgsagd56/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+     tinymce.init({
+         selector: 'textarea',
+         plugins: 'lists ',
+         menubar:'file edit format'
+         //// toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+         //toolbar_mode: 'floating',
+         //tinycomments_mode: 'embedded',
+         //tinycomments_author: 'Author name',
+     });
+
+       @*
+                 tinymce.init({
+                     selector: 'textarea',
+                     plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+                     toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+                     toolbar_mode: 'floating',
+                     tinycomments_mode: 'embedded',
+                     tinycomments_author: 'Author name',
+                 });
+       *@
+
+
+     // incase we need to do validation on the screen
+     function validateInput()
+     {
+         if (document.getElementById("uploadBox").value = "") {
+             swal("Error", "Please Select an PDF file", "error")
+             return false;
+
+         }
+         return true;
+
+
+
+     }
+    </script>
+
+}
