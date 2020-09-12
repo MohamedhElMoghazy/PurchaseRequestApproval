@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -35,6 +36,11 @@ namespace PurchaseRequestApproval.Models
 
 
         public int ETADays { get; set; }
+
+       [DataType(DataType.Date)]
+       [Display(Name = "Choose the quote data")]
+       
+
 
         public DateTime QuoteDate { get; set; }
         public string PdfUrl { get; set; }

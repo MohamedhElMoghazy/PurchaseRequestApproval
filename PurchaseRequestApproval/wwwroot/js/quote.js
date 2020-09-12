@@ -15,7 +15,7 @@ $(document).ready(function () {
 
                 { "data": "quoteDescription", "width ": "15%" },
                 { "data": "quoteAmount", "width ": "15%" },
-                { "data": "eTADays", "width ": "15%" },
+                { "data": "etaDays", "width ": "15%" },
                 { "data": "quoteDate", "width ": "15%" },
                 { "data": "vendor.vendorName", "width ": "15%" },
                 { "data": "shipping.shippingName", "width ": "15%" },
