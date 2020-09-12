@@ -194,7 +194,10 @@
 
                     </div>
                     <div class="col-8">
-                       <input type="file" name="files" id="uploadBox" multiple class="form-control"/>
+                        @*<input asp-for="Quote.PdfUrl" type="file" name="files" id="uploadBox" multiple class="form-control"/>*@
+                        @*<input type="file" name="files" id="uploadBox" multiple class="form-control" />*@
+                        <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+
 
                     </div>
                 </div>
@@ -277,7 +280,7 @@
         @*To add the file in the quote view*@
         @if (Model.Quote.Id != 0)
         { 
-    <div class="col-3 offset-1">
+    <div class="col-3 offset-1 pt-4">
         @*<img src="@Model.Quote.PdfUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />*@
         <embed src="@Model.Quote.PdfUrl" width="100%" height="25%" style="border-radius:5px; border:1px solid #bbb9b9" />
 
@@ -299,7 +302,7 @@
         </form>
 
         @section Scripts {
-            <partial name="_ValidationScriptsPartial" />
+           <partial name="_ValidationScriptsPartial" />
 
             <script src="https://cdn.tiny.cloud/1/3dc91asmih4y7q0yz0bynzsiux4qvh5nk8b6tzfdjgsagd56/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 

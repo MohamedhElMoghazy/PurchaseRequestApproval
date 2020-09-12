@@ -75,6 +75,8 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
             // this for edit request
              quoteVM.Quote = _unitOfWork.Quote.Get(id.GetValueOrDefault()); // To add stored procedure
 
+
+
             //var parameter = new DynamicParameters(); // arrange parameters for sql server
             //parameter.Add("@Id", id); // arrange to send the Id
 
@@ -106,11 +108,14 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                     string fileName = Guid.NewGuid().ToString();
                     var uploads = Path.Combine(webRootPath, @"files\quotes");
                     var extenstion = Path.GetExtension(files[0].FileName);
+                   //quoteVM.Quote.PdfUrl = @"\files\quotes\" + fileName + extenstion; // testing for delete file
 
 
                     if (quoteVM.Quote.PdfUrl != null)
                     {
                         // this is an edit and we need to remove old image
+                        
+
                         var quotePath = Path.Combine(webRootPath, quoteVM.Quote.PdfUrl.TrimStart('\\'));
                         if (System.IO.File.Exists(quotePath))
                         {
@@ -183,6 +188,36 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index)); // if any mistake the name is gotted
 
             }
+            else
+            {
+                quoteVM.VendorList = _unitOfWork.Vendor.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.VendorName,
+                    Value = i.Id.ToString()
+
+                });
+
+                quoteVM.VendorContactList = _unitOfWork.VendorContact.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+
+                });
+                quoteVM.ShippingList = _unitOfWork.Shipping.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.ShippingName,
+                    Value = i.Id.ToString()
+
+                });
+                if(quoteVM.Quote.Id!=0)
+                {
+                    quoteVM.Quote = _unitOfWork.Quote.Get(quoteVM.Quote.Id);
+
+
+                }
+
+
+            }
             return View(quoteVM.Quote);
 
 
@@ -226,7 +261,20 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
             {
                 return Json(new { success = false, Message = "Error while deleting" });
             }
-             _unitOfWork.Quote.Remove(objFromDb);
+
+            string webRootPath = _hostEnvironment.WebRootPath;
+
+            var quotePath = Path.Combine(webRootPath, objFromDb.PdfUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(quotePath))
+            {
+                System.IO.File.Delete(quotePath);
+
+            }
+
+
+
+
+            _unitOfWork.Quote.Remove(objFromDb);
 
         //    _unitOfWork.SP_Call.Execute(SD.Proc_Quote_Delete, parameter); // Pass parameters to execute sql procedures
 
