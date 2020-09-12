@@ -91,57 +91,58 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
             return View(prapprovalVM);
          //   return View();
         }
-        /*
+      
         // To define a post action method 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(PRApproval prapproval) 
+        public IActionResult Upsert(PRApprovalVM prapprovalVM) 
         { 
             if (ModelState.IsValid)
             {
                 // to pass parameters to sql procedrues
                 var parameter = new DynamicParameters();
-                parameter.Add("@PRApprovalId", prapproval.PRApprovalId);
-                parameter.Add("@PRApprovalTitle ", prapproval.PRApprovalTitle);
-                parameter.Add("@PRApprovalDescription ", prapproval.PRApprovalDescription);
-                parameter.Add("@WorkOrder ", prapproval.WorkOrder);
-                parameter.Add("@CMOA", prapproval.CMOA);
-                parameter.Add("@MatCorVer ", prapproval.MatCorVer);
-                parameter.Add("@Warranty ", prapproval.Warranty);
-                parameter.Add("@WorkDurationSiteDays ", prapproval.WorkDurationSiteDays);
-                parameter.Add("@RateSheet ", prapproval.RateSheet);
-                parameter.Add("@GateAccess ", prapproval.GateAccess);
-                parameter.Add("@RentalPeriodDays ", prapproval.RentalPeriodDays);
-                parameter.Add("@EquipmentTireEngine ", prapproval.EquipmentTireEngine);
-                parameter.Add("@JustificationVendor ", prapproval.JustificationVendor);
-                parameter.Add("@VendorId", prapproval.VendorId);
-                parameter.Add("@PurchaseTypeId", prapproval.PurchaseTypeId);
-                parameter.Add("@SourcedBy", prapproval.SourcedBy);
-                parameter.Add("@ProjectId", prapproval.ProjectId);
+                parameter.Add("@PRApprovalId", prapprovalVM.PRApproval.PRApprovalId);
+                parameter.Add("@PRApprovalTitle ", prapprovalVM.PRApproval.PRApprovalTitle);
+                parameter.Add("@PRApprovalDescription ", prapprovalVM.PRApproval.PRApprovalDescription);
+                parameter.Add("@WorkOrder ", prapprovalVM.PRApproval.WorkOrder);
+                parameter.Add("@CMOA", prapprovalVM.PRApproval.CMOA);
+                parameter.Add("@MatCorVer ", prapprovalVM.PRApproval.MatCorVer);
+                parameter.Add("@Warranty ", prapprovalVM.PRApproval.Warranty);
+                parameter.Add("@WorkDurationSiteDays ", prapprovalVM.PRApproval.WorkDurationSiteDays);
+                parameter.Add("@RateSheet ", prapprovalVM.PRApproval.RateSheet);
+                parameter.Add("@GateAccess ", prapprovalVM.PRApproval.GateAccess);
+                parameter.Add("@RentalPeriodDays ", prapprovalVM.PRApproval.RentalPeriodDays);
+                parameter.Add("@EquipmentTireEngine ", prapprovalVM.PRApproval.EquipmentTireEngine);
+                parameter.Add("@JustificationVendor ", prapprovalVM.PRApproval.JustificationVendor);
+                parameter.Add("@VendorId", prapprovalVM.PRApproval.VendorId);
+                parameter.Add("@PurchaseTypeId", prapprovalVM.PRApproval.PurchaseTypeId);
+                parameter.Add("@SourcedBy", prapprovalVM.PRApproval.SourcedBy);
+                parameter.Add("@ProjectId", prapprovalVM.PRApproval.ProjectId);
                 
 
-                if (prapproval.Id==0) // create case whenever no ID posted
+                if (prapprovalVM.PRApproval.Id==0) // create case whenever no ID posted
                 {
-                    // _unitOfWork.PRApproval.Add(prapproval); // to allow sql procedrues
-                    _unitOfWork.SP_Call.Execute(SD.Proc_PRApproval_Create, parameter);
+                    _unitOfWork.PRApproval.Add(prapprovalVM.PRApproval); // to allow sql procedrues
+                   // _unitOfWork.SP_Call.Execute(SD.Proc_PRApproval_Create, parameter);
 
 
                 }
                 else
                 {
-                    parameter.Add("@Id", prapproval.Id);
-                    _unitOfWork.SP_Call.Execute(SD.Proc_PRApproval_Update, parameter);
+                    parameter.Add("@Id", prapprovalVM.PRApproval.Id);
+                    // _unitOfWork.SP_Call.Execute(SD.Proc_PRApproval_Update, parameter);
+                    _unitOfWork.PRApproval.Update(prapprovalVM.PRApproval);
 
                 }
                 _unitOfWork.Save();
                 return RedirectToAction(nameof(Index)); // if any mistake the name is gotted
 
             }
-            return View(prapproval);
+            return View(prapprovalVM);
         
         
         }
-        */
+       
 
 
         #region API CALLS

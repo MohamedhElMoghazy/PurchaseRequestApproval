@@ -103,38 +103,38 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
          //   return View();
         }
 
-        /*
+        
 
         // To define a post action method 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(PRAQuote praquote) 
+        public IActionResult Upsert(PRAQuoteVM praquoteVM) 
         { 
             if (ModelState.IsValid)
             {
                 // to pass parameters to sql procedrues
                 var parameter = new DynamicParameters();
-                parameter.Add("@PRAQuoteDate", praquote.PRAQuoteDate);
-                parameter.Add("@PRARevision", praquote.PRARevision);
-                parameter.Add("@JustificationRev", praquote.JustificationRev);
-                parameter.Add("@EstimatedPrice", praquote.EstimatedPrice);
-                parameter.Add("@AddWarCost", praquote.AddWarCost);
-                parameter.Add("@FreightCost", praquote.FreightCost);
-                parameter.Add("@EnvFees", praquote.EnvFees);
-                parameter.Add("@CarbonTax", praquote.CarbonTax);
-                parameter.Add("@PSTCost", praquote.PSTCost);
-                parameter.Add("@Mobilization", praquote.Mobilization);
-                parameter.Add("@SiteOrientation", praquote.SiteOrientation);
-                parameter.Add("@RentalInsurance", praquote.RentalInsurance);
-                parameter.Add("@EquipmentDisinfection", praquote.EquipmentDisinfection);
-                parameter.Add("@ContingencyPercentage", praquote.ContingencyPercentage);
-                parameter.Add("@ContingencyAmount", praquote.ContingencyAmount);
-                parameter.Add("@Total", praquote.Total);
-                parameter.Add("@PRAId", praquote.PRAId);
-                parameter.Add("@SubmittedBy ", praquote.SubmittedBy);
-                parameter.Add("@QuoteId", praquote.QuoteId);
-                parameter.Add("@QuoteAl1Id", praquote.QuoteAl1Id);
-                parameter.Add("@QuoteAl2Id", praquote.QuoteAl2Id);
+                parameter.Add("@PRAQuoteDate", praquoteVM.PRAQuote.PRAQuoteDate);
+                parameter.Add("@PRARevision", praquoteVM.PRAQuote.PRARevision);
+                parameter.Add("@JustificationRev", praquoteVM.PRAQuote.JustificationRev);
+                parameter.Add("@EstimatedPrice", praquoteVM.PRAQuote.EstimatedPrice);
+                parameter.Add("@AddWarCost", praquoteVM.PRAQuote.AddWarCost);
+                parameter.Add("@FreightCost", praquoteVM.PRAQuote.FreightCost);
+                parameter.Add("@EnvFees", praquoteVM.PRAQuote.EnvFees);
+                parameter.Add("@CarbonTax", praquoteVM.PRAQuote.CarbonTax);
+                parameter.Add("@PSTCost", praquoteVM.PRAQuote.PSTCost);
+                parameter.Add("@Mobilization", praquoteVM.PRAQuote.Mobilization);
+                parameter.Add("@SiteOrientation", praquoteVM.PRAQuote.SiteOrientation);
+                parameter.Add("@RentalInsurance", praquoteVM.PRAQuote.RentalInsurance);
+                parameter.Add("@EquipmentDisinfection", praquoteVM.PRAQuote.EquipmentDisinfection);
+                parameter.Add("@ContingencyPercentage", praquoteVM.PRAQuote.ContingencyPercentage);
+                parameter.Add("@ContingencyAmount", praquoteVM.PRAQuote.ContingencyAmount);
+                parameter.Add("@Total", praquoteVM.PRAQuote.Total);
+                parameter.Add("@PRAId", praquoteVM.PRAQuote.PRAId);
+                parameter.Add("@SubmittedBy ", praquoteVM.PRAQuote.SubmittedBy);
+                parameter.Add("@QuoteId", praquoteVM.PRAQuote.QuoteId);
+                parameter.Add("@QuoteAl1Id", praquoteVM.PRAQuote.QuoteAl1Id);
+                parameter.Add("@QuoteAl2Id", praquoteVM.PRAQuote.QuoteAl2Id);
 
 
 
@@ -146,29 +146,30 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
 
 
-                if (praquote.Id==0) // create case whenever no ID posted
+                if (praquoteVM.PRAQuote.Id==0) // create case whenever no ID posted
                 {
-                    // _unitOfWork.PRAQuote.Add(praquote); // to allow sql procedrues
-                    _unitOfWork.SP_Call.Execute(SD.Proc_PRAQuote_Create, parameter);
+                     _unitOfWork.PRAQuote.Add(praquoteVM.PRAQuote); // to allow sql procedrues
+                    //_unitOfWork.SP_Call.Execute(SD.Proc_PRAQuote_Create, parameter);
 
 
                 }
                 else
                 {
-                    parameter.Add("@Id", praquote.Id);
-                    _unitOfWork.SP_Call.Execute(SD.Proc_PRAQuote_Update, parameter);
+                    parameter.Add("@Id", praquoteVM.PRAQuote.Id);
+                    // _unitOfWork.SP_Call.Execute(SD.Proc_PRAQuote_Update, parameter);
+                    _unitOfWork.PRAQuote.Update(praquoteVM.PRAQuote); // to allow sql procedrues
 
                 }
                 _unitOfWork.Save();
                 return RedirectToAction(nameof(Index)); // if any mistake the name is gotted
 
             }
-            return View(praquote);
+            return View(praquoteVM);
         
         
         }
 
-            */
+            
 
         #region API CALLS
 
