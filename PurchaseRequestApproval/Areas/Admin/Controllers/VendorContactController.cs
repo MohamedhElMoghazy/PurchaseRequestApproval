@@ -66,44 +66,45 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
          //   return View();
         }
 
-        // To define a post action method 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Upsert(VendorContact vendorcontact) 
-        //{ 
-        //    if (ModelState.IsValid)
-        //    {
-        //        // to pass parameters to sql procedrues
-        //        var parameter = new DynamicParameters();
-        //        parameter.Add("@Name", vendorcontact.Name);
-        //        parameter.Add("@Email", vendorcontact.Email);
-        //        parameter.Add("@Branch", vendorcontact.Branch);
-        //        parameter.Add("@Remark", vendorcontact.Remark);
-        //        parameter.Add("@VendorId", vendorcontact.VendorId);
-                
+        //To define a post action method
+       [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(VendorContactVM vendorcontactVM)
+        {
+            if (ModelState.IsValid)
+            {
+                // to pass parameters to sql procedrues
+                var parameter = new DynamicParameters();
+                parameter.Add("@Name", vendorcontactVM.VendorContact.Name);
+                parameter.Add("@Email", vendorcontactVM.VendorContact.Email);
+                parameter.Add("@Branch", vendorcontactVM.VendorContact.Branch);
+                parameter.Add("@Remark", vendorcontactVM.VendorContact.Remark);
+                parameter.Add("@VendorId", vendorcontactVM.VendorContact.VendorId);
 
 
-        //        if (vendorcontact.Id==0) // create case whenever no ID posted
-        //        {
-        //            // _unitOfWork.VendorContact.Add(vendorcontact); // to allow sql procedrues
-        //            _unitOfWork.SP_Call.Execute(SD.Proc_VendorContact_Create, parameter);
+
+                if (vendorcontactVM.VendorContact.Id == 0) // create case whenever no ID posted
+                {
+                    _unitOfWork.VendorContact.Add(vendorcontactVM.VendorContact); // to allow sql procedrues
+                  //  _unitOfWork.SP_Call.Execute(SD.Proc_VendorContact_Create, parameter);
 
 
-        //        }
-        //        else
-        //        {
-        //            parameter.Add("@Id", vendorcontact.Id);
-        //            _unitOfWork.SP_Call.Execute(SD.Proc_VendorContact_Update, parameter);
+                }
+                else
+                {
+                    parameter.Add("@Id", vendorcontactVM.VendorContact.Id);
+                    _unitOfWork.VendorContact.Update(vendorcontactVM.VendorContact);
+                    //  _unitOfWork.SP_Call.Execute(SD.Proc_VendorContact_Update, parameter);
 
-        //        }
-        //        _unitOfWork.Save();
-        //        return RedirectToAction(nameof(Index)); // if any mistake the name is gotted
+                }
+                _unitOfWork.Save();
+                return RedirectToAction(nameof(Index)); // if any mistake the name is gotted
 
-        //    }
-        //    return View(vendorcontact);
-        
-        
-        //}
+            }
+            return View(vendorcontactVM);
+
+
+        }
 
 
 

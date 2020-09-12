@@ -25,4 +25,8 @@
     <ProjectReference Include="..\PurchaseRequestApproval.Utility\PurchaseRequestApproval.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\files\quotes\" />
+  </ItemGroup>
+
 </Project>

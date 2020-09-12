@@ -20,7 +20,7 @@ $(document).ready(function () {
                 { "data": "vendor.VendorName", "width ": "11.25%" },
                 { "data": "purchaseType.PurcahseTypeName", "width ": "11.25%" },
                 { "data": "employee.EmployeeName", "width ": "11.25%" },
-                { "data": "project.ProjectName", "width ": "11.25%" },
+                { "data": "project.projectName", "width ": "11.25%" },
 
 
 

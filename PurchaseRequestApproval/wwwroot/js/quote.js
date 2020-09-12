@@ -18,7 +18,7 @@ $(document).ready(function () {
                 { "data": "eTADays", "width ": "15%" },
                 { "data": "quoteDate", "width ": "15%" },
                 { "data": "vendor.VendorName", "width ": "15%" },
-                { "data": "shipping.ShippingName", "width ": "15%" },
+                { "data": "shipping.shippingName", "width ": "15%" },
 
 
 

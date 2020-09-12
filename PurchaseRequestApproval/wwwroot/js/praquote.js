@@ -18,7 +18,7 @@ $(document).ready(function () {
                 { "data": "estimatedPrice", "width ": "15%" },
                 { "data": "pRARevision", "width ": "15%" },
                 { "data": "employee.EmployeeName", "width ": "15%" },
-                { "data": "quote.QuoteDescription", "width ": "15%" },
+                { "data": "quote.quoteDescription", "width ": "15%" },
 
 
 

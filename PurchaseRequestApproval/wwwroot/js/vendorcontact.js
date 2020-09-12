@@ -18,7 +18,7 @@ $(document).ready(function () {
                 { "data": "phone", "width ": "15%" },
                 { "data": "branch", "width ": "15%" },
                 { "data": "remark", "width ": "15%" },
-                { "data": "vendor.VendorName", "width ": "15%" },
+                { "data": "vendor.vendorName", "width ": "15%" },
 
 
 
