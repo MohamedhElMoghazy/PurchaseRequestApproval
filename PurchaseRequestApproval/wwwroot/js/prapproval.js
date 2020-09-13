@@ -8,7 +8,7 @@ $(document).ready(function () {
     function loadDataTable() {
         dataTable = $('#tblData').DataTable({
             "ajax": {
-                "url": "/Admin/PRApproval/GetAll"
+                "url": "/Employee/PRApproval/GetAll"
             },
 
             "columns": [
@@ -30,10 +30,10 @@ $(document).ready(function () {
                     "render": function (data) {
                         return `
                             <div class="text-center">
-                                <a href="/Admin/PRApproval/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                <a href="/Employee/PRApproval/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
                                     <i class="fas fa-edit"></i> 
                                 </a>
-                                <a onclick=Delete("/Admin/PRApproval/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                <a onclick=Delete("/Employee/PRApproval/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
                                     <i class="fas fa-trash-alt"></i> 
                                 </a>
                             </div>

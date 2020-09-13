@@ -16,7 +16,7 @@ using System.IO;
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Employee")]
     public class QuoteController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

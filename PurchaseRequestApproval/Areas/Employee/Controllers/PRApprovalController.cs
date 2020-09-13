@@ -14,7 +14,7 @@ using PurchaseRequestApproval.Models.ViewModels;
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Employee")]
     public class PRApprovalController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Employee")]
     public class VendorContactController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
