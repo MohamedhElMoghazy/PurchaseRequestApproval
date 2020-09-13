@@ -60,6 +60,23 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            // Adding the new data for Application User
+
+            // Access Level to be handled lower level for data entry and increase with admins
+            [Required]
+            public int AccessLevel { get; set; }
+
+            [Required]
+            public int EmployeeUser { get; set; }
+
+            // Role to be not mapped not to send to the data base
+            public String Role { get; set; }
+
+
+
+
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
