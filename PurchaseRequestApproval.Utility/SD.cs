@@ -42,6 +42,15 @@ namespace PurchaseRequestApproval.Utility
         public const string Proc_Project_Update = "usp_UpdateProject";
         public const string Proc_Project_Delete = "usp_DeleteProject";
 
+        public const int AccessLevel1EmpView = 1; // user will only see the tables without modification
+        public const int AccessLevel2EmpMod = 2; // user will Modify Tables
+        public const int AccessLevel3AdminView = 3; // Admin will only see the tables without modification
+        public const int AccessLevel4AdminMod = 4; // Admin will Modify Tables
+
+
+
+
+
 
 
     }

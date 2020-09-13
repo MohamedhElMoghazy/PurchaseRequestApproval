@@ -20,7 +20,25 @@ $(document).ready(function () {
                 { "data": "salesContactEmail", "width ": "15%" },
                 //{ "data": "accountContactName", "width ": "10%" },
                // { "data": "accContactEmail", "width ": "10%" },
-                { "data": "regVendor", "width ": "15%" },
+                //{ "data": "regVendor", "width ": "15%" },
+                    {
+                        "data": "regVendor",
+                        "render": function (data)
+                        {
+                            if (data)
+                            {
+                                return `<input type="checkbox" disabled checked />`
+                            }
+                            else
+                            {
+                                return `<input type="checkbox" disabled/>`
+                            }
+                        },
+
+                        "width ": "15%"
+                    },
+
+
 
 
 
