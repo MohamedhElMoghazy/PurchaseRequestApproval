@@ -17,6 +17,9 @@ namespace PurchaseRequestApproval.DataAccess.Repository.IRepository
         IQuoteRepository Quote { get; }
         IVendorContactRepository VendorContact { get; }
 
+        // Arrange for Application User
+        IApplicationUserRepository ApplicationUser { get; }
+
 
         //SP_Call SP_Call  { get; }
         ISP_Call SP_Call { get; }

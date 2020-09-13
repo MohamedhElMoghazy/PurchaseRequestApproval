@@ -23,7 +23,12 @@ namespace PurchaseRequestApproval.DataAccess.Repository
             Project= new ProjectRepository(_db);
             Quote = new QuoteRepository(_db);
             VendorContact = new VendorContactRepository(_db);
-   
+
+            ApplicationUser = new ApplicationUserRepository(_db);
+
+
+
+
             //SP_Call = new SP_Call(_db);
             SP_Call = new SP_Call(_db);
 
@@ -42,6 +47,10 @@ namespace PurchaseRequestApproval.DataAccess.Repository
         public IProjectRepository Project { get; private set; }
         public IQuoteRepository Quote { get; private set; }
         public IVendorContactRepository VendorContact { get; private set; }
+
+// Arrange for Application User
+        public IApplicationUserRepository ApplicationUser { get; private set; }
+
 
 
 
