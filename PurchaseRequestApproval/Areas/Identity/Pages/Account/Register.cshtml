@@ -19,10 +19,7 @@
                 <label asp-for="Input.Name"></label>
                 <input asp-for="Input.Name" class="form-control" />
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
-             </div>
-
-
-
+            </div>
 
 
             <div class="form-group">
@@ -55,20 +52,6 @@
         <span asp-validation-for="Input.EmployeeUser" class="text-danger"></span>
 
     </div>-->
-            @*Adding Drop list for Employee*@
-
-            <div class="form-group">
-                <label asp-for="Input.EmployeeUser"></label>
-                @Html.DropDownListFor(m => m.Input.EmployeeUser, Model.Input.EmployeeList,
-               "-Please select an Employee", new { @class = "form-control" })
-            </div>
-
-            @*Adding Drop list for Employee*@
-
-
-
-
-
             @*Adding new fields Role*@
             <!--<div class="form-group">
         <label asp-for="Input.Role"></label>
@@ -84,6 +67,17 @@
                     @Html.DropDownListFor(m => m.Input.Role, Model.Input.RoleList,
                    "-Please select a role", new { @class = "form-control" })
                 </div>
+
+                @*Adding Drop list for Employee*@
+
+                <div class="form-group">
+                    <label asp-for="Input.EmployeeUser"></label>
+                    @Html.DropDownListFor(m => m.Input.EmployeeUser, Model.Input.EmployeeList,
+                   "-Please select an Employee", new { @class = "form-control" })
+                </div>
+
+                @*Adding Drop list for Employee*@
+
 
 
 
