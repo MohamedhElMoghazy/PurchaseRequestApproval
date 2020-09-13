@@ -108,15 +108,20 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                     string fileName = Guid.NewGuid().ToString();
                     var uploads = Path.Combine(webRootPath, @"files\quotes");
                     var extenstion = Path.GetExtension(files[0].FileName);
-                   //quoteVM.Quote.PdfUrl = @"\files\quotes\" + fileName + extenstion; // testing for delete file
+                    //quoteVM.Quote.PdfUrl = @"\files\quotes\" + fileName + extenstion; // testing for delete file
 
+                    Quote objFromDB = _unitOfWork.Quote.Get(quoteVM.Quote.Id);//testing now for delete the old files
+                    if (objFromDB.PdfUrl!=null)// //testing now for delete the old files
 
-                    if (quoteVM.Quote.PdfUrl != null)
+                    // if (quoteVM.Quote.PdfUrl != null)
                     {
                         // this is an edit and we need to remove old image
-                        
 
-                        var quotePath = Path.Combine(webRootPath, quoteVM.Quote.PdfUrl.TrimStart('\\'));
+
+                       // var quotePath = Path.Combine(webRootPath, quoteVM.Quote.PdfUrl.TrimStart('\\'));
+                        var quotePath = Path.Combine(webRootPath, objFromDB.PdfUrl.TrimStart('\\'));
+
+
                         if (System.IO.File.Exists(quotePath))
                         {
                             System.IO.File.Delete(quotePath);
