@@ -50,11 +50,11 @@ namespace PurchaseRequestApproval.Models
        [ForeignKey("QuoteId")]
        public Quote Quote { get; set; }
 
-        public int QuoteAl1Id { get; set; }
+        public int? QuoteAl1Id { get; set; }
         [ForeignKey("QuoteAl1Id")]
         public Quote QuoteAl1 { get; set; }
 
-        public int QuoteAl2Id { get; set; }
+        public int? QuoteAl2Id { get; set; }
         [ForeignKey("QuoteAl2Id")]
         public Quote QuoteAl2 { get; set; }
 

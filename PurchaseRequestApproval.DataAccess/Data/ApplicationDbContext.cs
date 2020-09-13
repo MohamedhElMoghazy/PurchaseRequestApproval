@@ -25,6 +25,7 @@ namespace PurchaseRequestApproval.DataAccess.Data
         public DbSet<PRApproval> PRApprovals { get; set; }
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<PRAQuote> PRAQuotes { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
 
 
