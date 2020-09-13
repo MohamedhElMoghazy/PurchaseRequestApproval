@@ -1,5 +1,6 @@
 ﻿@page
 @model RegisterModel
+@using PurchaseRequestApproval.Utility
 @{
     ViewData["Title"] = "Register";
 }
@@ -35,25 +36,52 @@
 
 
             @*Adding new fields AccessLevel*@
-            <div class="form-group">
-                <label asp-for="Input.AccessLevel"></label>
-                <input asp-for="Input.AccessLevel" class="form-control" />
-                <span asp-validation-for="Input.AccessLevel" class="text-danger"></span>
-            </div>
-
+            <!--<div class="form-group">
+        <label asp-for="Input.AccessLevel"></label>
+        <input asp-for="Input.AccessLevel" class="form-control" />
+        <span asp-validation-for="Input.AccessLevel" class="text-danger"></span>
+    </div>-->
             @*Adding new fields EmployeeUser*@
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label asp-for="Input.EmployeeUser"></label>
                 <input asp-for="Input.EmployeeUser" class="form-control" />
                 <span asp-validation-for="Input.EmployeeUser" class="text-danger"></span>
+
+            </div>-->
+
+            @*Adding Drop list for Employee*@
+
+            <div class="form-group">
+                <label asp-for="Input.EmployeeUser"></label>
+                @Html.DropDownListFor(m => m.Input.EmployeeUser, Model.Input.EmployeeList,
+               "-Please select an Employee", new { @class = "form-control" })
             </div>
+
+            @*Adding Drop list for Employee*@
+
+
+
+
 
             @*Adding new fields Role*@
             <!--<div class="form-group">
-                <label asp-for="Input.Role"></label>
-                <input asp-for="Input.Role" class="form-control" />
-                <span asp-validation-for="Input.Role" class="text-danger"></span>
-            </div>-->
+        <label asp-for="Input.Role"></label>
+        <input asp-for="Input.Role" class="form-control" />
+        <span asp-validation-for="Input.Role" class="text-danger"></span>
+    </div>-->
+
+
+            @if (User.IsInRole(SD.Role_Admin_Modify))
+            {
+                <div class="form-group">
+                    <label asp-for="Input.Role"></label>
+                    @Html.DropDownListFor(m => m.Input.Role, Model.Input.RoleList,
+                   "-Please select a role", new { @class = "form-control" })
+                </div>
+
+
+
+            }
 
 
 

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using PurchaseRequestApproval.DataAccess.Repository.IRepository;
@@ -74,15 +75,16 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
             // Adding the new data for Application User
 
             // Access Level to be handled lower level for data entry and increase with admins
-            [Required]
-            public int AccessLevel { get; set; }
+           // [Required]
+           //public int AccessLevel { get; set; }
 
             [Required]
             public int EmployeeUser { get; set; }
+            public IEnumerable<SelectListItem> EmployeeList { get; set; } // To show drop down
 
             // Role to be not mapped not to send to the data base
             public String Role { get; set; }
-
+            public IEnumerable<SelectListItem> RoleList { get; set; } // To show drop down
 
 
 
@@ -92,6 +94,27 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
+
+            Input = new InputModel()
+            {
+                EmployeeList = _unitOfWork.Employee.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.EmployeeName,
+                    Value = i.Id.ToString()
+
+                }),
+
+                RoleList = _roleManager.Roles.Where(u=>u.Name!=SD.Role_Employee_View).Select(x=>x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+
+                })
+
+
+        };
+
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
@@ -108,9 +131,9 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
                 {
                     UserName = Input.Email,
                     Email = Input.Email,
-                    AccessLevel = Input.AccessLevel,
+                    //AccessLevel = Input.AccessLevel,
                     EmployeeUser = Input.EmployeeUser,
-                    Role = Input.Role
+                   Role = Input.Role
                 };
 
 

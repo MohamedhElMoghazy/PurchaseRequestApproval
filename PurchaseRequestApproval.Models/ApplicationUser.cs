@@ -10,14 +10,17 @@ namespace PurchaseRequestApproval.Models
    public class ApplicationUser : IdentityUser
     {
         // Access Level to be handled lower level for data entry and increase with admins
-        public int AccessLevel { get; set; }
+        public int AccessLevel { get; set; } // Disabled for now
+
+        // Add name for Registeration
+        public string Name { get; set; }
 
 
 
 
         // Forign Key Submitted by
-        [Required]
-        public int EmployeeUser { get; set; }
+        // [Required] Let the Employee User as option to enable viewing the data from outside
+        public int? EmployeeUser { get; set; }
         [ForeignKey("EmployeeUser")]
         public Employee Employee { get; set; }
 
