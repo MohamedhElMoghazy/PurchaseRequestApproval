@@ -16,6 +16,8 @@ using PurchaseRequestApproval.DataAccess.Data;
 using PurchaseRequestApproval.Models.ViewModels; // configure the new folders for view error
 using PurchaseRequestApproval.DataAccess.Repository.IRepository;
 using PurchaseRequestApproval.DataAccess.Repository;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using PurchaseRequestApproval.Utility;
 
 namespace PurchaseRequestApproval
 {
@@ -34,8 +36,9 @@ namespace PurchaseRequestApproval
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddSingleton<IEmailSender, EmailSender>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation(); // add AddRazorRunTime Compilation To the poject
             services.AddRazorPages();

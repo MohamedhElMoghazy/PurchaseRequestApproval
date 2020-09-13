@@ -48,6 +48,12 @@ namespace PurchaseRequestApproval.Utility
         public const int AccessLevel4AdminMod = 4; // Admin will Modify Tables
 
 
+        public const string Role_Employee_View = "Employee View";
+        public const string Role_Employee_Modify = "Employee Modify";
+        public const string Role_Admin_View = "Admin View";
+        public const string Role_Admin_Modify = "Admin Modify";
+
+
 
 
 
