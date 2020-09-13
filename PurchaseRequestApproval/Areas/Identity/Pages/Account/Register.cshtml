@@ -14,6 +14,13 @@
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
 
+            @*Adding new fields Name for Only NickName*@
+            <div class="form-group">
+                <label asp-for="Input.Name"></label>
+                <input asp-for="Input.Name" class="form-control" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+             </div>
+
 
 
 
@@ -43,12 +50,11 @@
     </div>-->
             @*Adding new fields EmployeeUser*@
             <!--<div class="form-group">
-                <label asp-for="Input.EmployeeUser"></label>
-                <input asp-for="Input.EmployeeUser" class="form-control" />
-                <span asp-validation-for="Input.EmployeeUser" class="text-danger"></span>
+        <label asp-for="Input.EmployeeUser"></label>
+        <input asp-for="Input.EmployeeUser" class="form-control" />
+        <span asp-validation-for="Input.EmployeeUser" class="text-danger"></span>
 
-            </div>-->
-
+    </div>-->
             @*Adding Drop list for Employee*@
 
             <div class="form-group">

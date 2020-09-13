@@ -75,8 +75,11 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
             // Adding the new data for Application User
 
             // Access Level to be handled lower level for data entry and increase with admins
-           // [Required]
-           //public int AccessLevel { get; set; }
+            // [Required]
+            //public int AccessLevel { get; set; }
+
+            [Required]
+            public string Name { get; set; }
 
             [Required]
             public int EmployeeUser { get; set; }
