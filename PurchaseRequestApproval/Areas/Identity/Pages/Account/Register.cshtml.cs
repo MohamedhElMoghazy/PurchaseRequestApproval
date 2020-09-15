@@ -135,6 +135,7 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
                     UserName = Input.Email,
                     Email = Input.Email,
                     //AccessLevel = Input.AccessLevel,
+                    Name=Input.Name,
                     EmployeeUser = Input.EmployeeUser,
                    Role = Input.Role
                 };
@@ -166,8 +167,16 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
                         await _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee_View));
                     }
 
-                    await _userManager.AddToRoleAsync(user, SD.Role_Admin_Modify);
+                    //await _userManager.AddToRoleAsync(user, SD.Role_Admin_Modify); // only used first time of running the program
+                    if(user.Role==null)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.Role_Employee_View);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, user.Role); // assign the role from the drop list
 
+                    }
 
 
 
@@ -191,8 +200,16 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        if (user.Role==null)
+                        { 
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
+                        }
+                        else
+                        {
+                            // Admin is Registering a new user
+                            return RedirectToAction("Index", "User", new { Area = "Admin" });
+                        }
                     }
                 }
                 foreach (var error in result.Errors)
