@@ -38,7 +38,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         public IActionResult GetAll()
          {
 
-            var userList = _db.ApplicationUsers.Include(u=>u.Employee).ToList(); // commented to allow the link to procedures
+            var userList = _db.ApplicationUsers.Include(u=>u.Employee).ToList(); 
             var userRole = _db.UserRoles.ToList(); // to show all users role
             var roles = _db.Roles.ToList(); // to show all roles
 

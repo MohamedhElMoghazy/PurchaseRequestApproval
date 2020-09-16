@@ -78,11 +78,12 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
             // [Required]
             //public int AccessLevel { get; set; }
 
-            [Required]
+            [Required] 
             public string Name { get; set; }
 
-            [Required]
-            public int EmployeeUser { get; set; }
+            [Required] // to enable null value
+            public int EmployeeUser { get; set; }  
+
             public IEnumerable<SelectListItem> EmployeeList { get; set; } // To show drop down
 
             // Role to be not mapped not to send to the data base
@@ -130,15 +131,18 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
                 //var user = new IdentityUser { UserName = Input.Email, Email = Input.Email }; // Disabled to Add Application user
                 // Starting for new employee Adding
 
-                var user = new ApplicationUser
+
+                    var user = new ApplicationUser
                 {
                     UserName = Input.Email,
                     Email = Input.Email,
                     //AccessLevel = Input.AccessLevel,
-                    Name=Input.Name,
+                    Name = Input.Name,
                     EmployeeUser = Input.EmployeeUser,
-                   Role = Input.Role
+                   // EmployeeUser = null,
+                    Role = Input.Role
                 };
+                if (user.EmployeeUser == 0) { user.EmployeeUser = null; } // To handle some error in the data base
 
 
                 // Ending of new modification for employee
@@ -207,6 +211,12 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
                         }
                         else
                         {
+                            /*
+                            if (user.EmployeeUser > 0)
+                            {
+                                await _userManager.AddToRoleAsync(user, SD.Role_Employee_Modify);
+                            }
+                            */
                             // Admin is Registering a new user
                             return RedirectToAction("Index", "User", new { Area = "Admin" });
                         }

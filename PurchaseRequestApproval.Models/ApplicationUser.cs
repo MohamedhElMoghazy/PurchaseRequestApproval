@@ -20,8 +20,8 @@ namespace PurchaseRequestApproval.Models
 
         // Forign Key Submitted by
         // [Required] Let the Employee User as option to enable viewing the data from outside
-        public int? EmployeeUser { get; set; }
-        [ForeignKey("EmployeeUser")]
+       public int? EmployeeUser { get; set; } 
+       [ForeignKey("EmployeeUser")]
         public Employee Employee { get; set; }
 
 
