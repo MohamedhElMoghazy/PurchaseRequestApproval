@@ -13,10 +13,13 @@ using PurchaseRequestApproval.Models.ViewModels;
 using PurchaseRequestApproval.Utility;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
     [Area("Employee")]
+    [Authorize(Roles = SD.Role_Admin_Modify + "," + SD.Role_Admin_View + "," + SD.Role_Employee_Modify + "," + SD.Role_Employee_View)]// Add authorization Level
+
     public class QuoteController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

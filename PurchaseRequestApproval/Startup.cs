@@ -42,6 +42,16 @@ namespace PurchaseRequestApproval
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation(); // add AddRazorRunTime Compilation To the poject
             services.AddRazorPages();
+
+            // CORRECT THE AREAS AFTER AUTHORIZATION
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

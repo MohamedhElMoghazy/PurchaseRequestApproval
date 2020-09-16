@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.Extensions.Logging;
@@ -10,10 +11,13 @@ using PurchaseRequestApproval.DataAccess.Repository.IRepository;
 using PurchaseRequestApproval.Models;
 // using PurchaseRequestApproval.Models;
 using PurchaseRequestApproval.Models.ViewModels;
+using PurchaseRequestApproval.Utility;
 
 namespace PurchaseRequestApproval.Areas.Empolyee.Controllers
 {
     [Area("Employee")] // explicity declear the controller is related to the employee area
+    [Authorize(Roles = SD.Role_Admin_Modify + "," + SD.Role_Admin_View + "," + SD.Role_Employee_Modify + "," + SD.Role_Employee_View)]// Add authorization Level
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

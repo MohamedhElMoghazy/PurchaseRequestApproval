@@ -11,10 +11,13 @@ using PurchaseRequestApproval.DataAccess.Repository.IRepository;
 using PurchaseRequestApproval.Models;
 using PurchaseRequestApproval.Utility;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin_Modify + "," + SD.Role_Admin_View)]// Add authorization Level
+
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _db; // here we work with DB Context to show the ability to use DB Context

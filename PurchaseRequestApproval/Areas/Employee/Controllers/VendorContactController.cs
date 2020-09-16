@@ -11,10 +11,13 @@ using PurchaseRequestApproval.Models;
 using PurchaseRequestApproval.Models.ViewModels;
 using PurchaseRequestApproval.Utility;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
     [Area("Employee")]
+    [Authorize(Roles = SD.Role_Admin_Modify + "," + SD.Role_Admin_View + "," + SD.Role_Employee_Modify + "," + SD.Role_Employee_View)]// Add authorization Level
+
     public class VendorContactController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

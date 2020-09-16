@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using PurchaseRequestApproval.Utility
+<!DOCTYPE html>
+
+
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,43 +35,47 @@
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
+                        @*Arrange the setup screen to showup only for admins*@
+
+                        @if ((User.IsInRole(SD.Role_Admin_Modify)) || (User.IsInRole(SD.Role_Admin_View)))
+                        {
+
+                            <!--Add bootstrab for dropdown menu Setup-->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    System Setup
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item " asp-area="Admin" asp-controller="PurchaseType" asp-action="Index">Purchase Type </a>
+                                    <a class="dropdown-item " asp-area="Admin" asp-controller="Shipping" asp-action="Index">Shipping Method </a>
+                                    <a class="dropdown-item " asp-area="Admin" asp-controller="Vendor" asp-action="Index">Vendor </a>
+                                    <a class="dropdown-item " asp-area="Admin" asp-controller="Employee" asp-action="Index">Employee </a>
+                                    <a class="dropdown-item " asp-area="Admin" asp-controller="Project" asp-action="Index">Project </a>
+                                    <a class="dropdown-item " asp-area="Admin" asp-controller="User" asp-action="Index">User </a>
+
+                                </div>
+                            </li>
 
 
+                            <!--End of bootstrab for dropdown menu Setup-->
 
-                        <!--Add bootstrab for dropdown menu Setup-->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                System Setup
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item " asp-area="Admin" asp-controller="PurchaseType" asp-action="Index">Purchase Type </a>
-                                <a class="dropdown-item " asp-area="Admin" asp-controller="Shipping" asp-action="Index">Shipping Method </a>
-                                <a class="dropdown-item " asp-area="Admin" asp-controller="Vendor" asp-action="Index">Vendor </a>
-                                <a class="dropdown-item " asp-area="Admin" asp-controller="Employee" asp-action="Index">Employee </a>
-                                <a class="dropdown-item " asp-area="Admin" asp-controller="Project" asp-action="Index">Project </a>
-                                <a class="dropdown-item " asp-area="Admin" asp-controller="User" asp-action="Index">User </a>
+                        }
 
-                                @*<a class="dropdown-item " asp-area="Admin" asp-controller="VendorContact" asp-action="Index">Vendor Contact </a>
-        <a class="dropdown-item " asp-area="Admin" asp-controller="Quote" asp-action="Index">Quote </a>
-        <a class="dropdown-item " asp-area="Admin" asp-controller="PRApproval" asp-action="Index">PR Approval </a>
-        <a class="dropdown-item " asp-area="Admin" asp-controller="PRAQuote" asp-action="Index">PRA Quote </a>*@
+                        @*Arrange the setup screen to showup only for Employee*@
 
-                            </div>
-                        </li>
-
-
-                        <!--End of bootstrab for dropdown menu Setup-->
-                        <!--Add bootstrab for dropdown menu Purcahse Request-->
+                        @if ((User.IsInRole(SD.Role_Admin_Modify)) || (User.IsInRole(SD.Role_Admin_View)) || (User.IsInRole(SD.Role_Employee_Modify)) || (User.IsInRole(SD.Role_Employee_View)))
+                        { 
+                            <!--Add bootstrab for dropdown menu Purcahse Request-->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Purchase Request
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @*<a class="dropdown-item " asp-area="Admin" asp-controller="PurchaseType" asp-action="Index">Purchase Type </a>
-                                <a class="dropdown-item " asp-area="Admin" asp-controller="Shipping" asp-action="Index">Shipping Method </a>
-                                <a class="dropdown-item " asp-area="Admin" asp-controller="Vendor" asp-action="Index">Vendor </a>
-                                <a class="dropdown-item " asp-area="Admin" asp-controller="Employee" asp-action="Index">Employee </a>
-                                <a class="dropdown-item " asp-area="Admin" asp-controller="Project" asp-action="Index">Project </a>*@
+                <a class="dropdown-item " asp-area="Admin" asp-controller="Shipping" asp-action="Index">Shipping Method </a>
+                <a class="dropdown-item " asp-area="Admin" asp-controller="Vendor" asp-action="Index">Vendor </a>
+                <a class="dropdown-item " asp-area="Admin" asp-controller="Employee" asp-action="Index">Employee </a>
+                <a class="dropdown-item " asp-area="Admin" asp-controller="Project" asp-action="Index">Project </a>*@
                                 <a class="dropdown-item " asp-area="Employee" asp-controller="VendorContact" asp-action="Index">Vendor Contact </a>
                                 <a class="dropdown-item " asp-area="Employee" asp-controller="Quote" asp-action="Index">Quote </a>
                                 <a class="dropdown-item " asp-area="Employee" asp-controller="PRApproval" asp-action="Index">PR Approval </a>
@@ -78,6 +86,7 @@
 
 
                         <!--End of bootstrab for dropdown menu Purchase Request-->
+                        }
 
 
 

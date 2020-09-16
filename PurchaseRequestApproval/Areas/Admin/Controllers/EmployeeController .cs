@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using PurchaseRequestApproval.DataAccess.Repository.IRepository;
@@ -13,6 +14,7 @@ using PurchaseRequestApproval.Utility;
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =SD.Role_Admin_Modify + ","+ SD.Role_Admin_View)]// Add authorization Level
     public class EmployeeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -20,7 +22,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-
+       
         public IActionResult Index()
         {
             return View();
