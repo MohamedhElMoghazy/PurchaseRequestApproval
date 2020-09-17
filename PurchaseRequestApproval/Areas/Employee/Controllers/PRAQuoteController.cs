@@ -111,6 +111,8 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         // To define a post action method 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Role_Admin_Modify + "," + SD.Role_Admin_View + "," + SD.Role_Employee_Modify)]// Add authorization Level
+
         public IActionResult Upsert(PRAQuoteVM praquoteVM) 
         { 
             if (ModelState.IsValid)
@@ -197,6 +199,8 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
         }
         [HttpDelete]
+        [Authorize(Roles = SD.Role_Admin_Modify + "," + SD.Role_Admin_View + "," + SD.Role_Employee_Modify)]// Add authorization Level
+
         public IActionResult Delete(int id)
         {
             var parameter = new DynamicParameters(); // arrange parameters for sql server

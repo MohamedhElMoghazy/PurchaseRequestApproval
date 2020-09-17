@@ -29,6 +29,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         }
 
         // create an method for upsert and can get null Id in case of create 
+        //[Authorize(Roles = SD.Role_Admin_Modify )]// Add authorization Level
         public IActionResult Upsert(int? id)
         {
             Employee employee = new Employee();
@@ -59,6 +60,8 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         // To define a post action method 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Role_Admin_Modify)]// Add authorization Level
+
         public IActionResult Upsert(Employee employee) 
         { 
             if (ModelState.IsValid)
@@ -120,6 +123,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
         }
         [HttpDelete]
+       [Authorize(Roles = SD.Role_Admin_Modify)]// Add authorization Level
         public IActionResult Delete(int id)
         {
             var parameter = new DynamicParameters(); // arrange parameters for sql server

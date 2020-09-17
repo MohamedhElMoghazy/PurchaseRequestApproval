@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using PurchaseRequestApproval.Utility; 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
@@ -16,9 +17,12 @@
 }
 else
 {
+    @if (User.IsInRole(SD.Role_Admin_Modify))
+    { 
     <li class="nav-item">
         <a class="nav-link " asp-area="Identity" asp-page="/Account/Register">Register</a>
     </li>
+    }
     <li class="nav-item">
         <a class="nav-link " asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>

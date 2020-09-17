@@ -27,6 +27,7 @@ $(document).ready(function () {
                     "data": "id",
                     "render": function (data) {
                         return `
+                            
                             <div class="text-center">
                                 <a href="/Admin/Employee/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
                                     <i class="fas fa-edit"></i> 
@@ -35,6 +36,8 @@ $(document).ready(function () {
                                     <i class="fas fa-trash-alt"></i> 
                                 </a>
                             </div>
+                               
+
                            `;
                     }, "width": "10%"
                 }

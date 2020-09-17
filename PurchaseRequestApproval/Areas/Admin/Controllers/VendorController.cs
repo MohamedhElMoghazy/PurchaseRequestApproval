@@ -57,6 +57,8 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         // To define a post action method 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Role_Admin_Modify)]// Add authorization Level
+
         public IActionResult Upsert(Vendor vendor) 
         { 
             if (ModelState.IsValid)
@@ -121,6 +123,8 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
         }
         [HttpDelete]
+        [Authorize(Roles = SD.Role_Admin_Modify)]// Add authorization Level
+
         public IActionResult Delete(int id)
         {
 
