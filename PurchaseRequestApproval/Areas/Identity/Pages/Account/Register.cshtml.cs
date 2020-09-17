@@ -93,7 +93,10 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
 
 
 
+
+
         }
+
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -154,6 +157,21 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
                     if (!await _roleManager.RoleExistsAsync(SD.Role_Admin_Modify))
                     {
                         await _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin_Modify));
+
+                        // Add logic for first user to add
+                        var userInitial = new ApplicationUser
+                        {
+                            UserName = "admin",
+                            Email = "admin@admin.com",
+                            //AccessLevel = Input.AccessLevel,
+                            Name = "admin",
+                            EmployeeUser = null,
+                            PasswordHash = "admin",
+                            Role = SD.Role_Admin_Modify
+                        };
+
+
+
                     }
 
                     if (!await _roleManager.RoleExistsAsync(SD.Role_Admin_View))
@@ -197,6 +215,8 @@ namespace PurchaseRequestApproval.Areas.Identity.Pages.Account
 
                     //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                     //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                   
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
