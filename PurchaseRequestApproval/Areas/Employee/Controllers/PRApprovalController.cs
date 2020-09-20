@@ -14,8 +14,7 @@ using PurchaseRequestApproval.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
-
-
+using OfficeOpenXml;
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
@@ -135,10 +134,19 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
                 if (prapprovalVM.PRApproval.Id==0) // create case whenever no ID posted
                 {
+                    // Adding operation to create an excel file
+                    var ExcelFileUrlName = CreateEmptyExcelPRA(prapprovalVM.PRApproval.PRApprovalId.ToString(),
+                         _unitOfWork.Vendor.Get(prapprovalVM.PRApproval.VendorId).VendorName,
+                        prapprovalVM.PRApproval.PRApprovalTitle,
+                        _unitOfWork.PurchaseType.Get(prapprovalVM.PRApproval.PurchaseTypeId).PurcahseCode.ToString(),
+                        "0");
+                    parameter.Add("@ExcelFileUrl", ExcelFileUrlName);
+                    prapprovalVM.PRApproval.ExcelFileUrl = ExcelFileUrlName;
+
+
                     _unitOfWork.PRApproval.Add(prapprovalVM.PRApproval); // to allow sql procedrues
-                   // _unitOfWork.SP_Call.Execute(SD.Proc_PRApproval_Create, parameter);
-
-
+                  // _unitOfWork.SP_Call.Execute(SD.Proc_PRApproval_Create, parameter);
+                                      
                 }
                 else
                 {
@@ -147,13 +155,12 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                     _unitOfWork.PRApproval.Update(prapprovalVM.PRApproval);
 
                 }
+                
                 _unitOfWork.Save();
-                // Adding operation to create an excel file
-                CreateEmptyExcelPRA(prapprovalVM.PRApproval.PRApprovalId.ToString(),
-                     _unitOfWork.Vendor.Get(prapprovalVM.PRApproval.VendorId).VendorName, 
-                    prapprovalVM.PRApproval.PRApprovalTitle,
-                    _unitOfWork.PurchaseType.Get(prapprovalVM.PRApproval.PurchaseTypeId).PurcahseCode.ToString(),
-                    "0");
+                EditExcelPRA(prapprovalVM.PRApproval.ExcelFileUrl, prapprovalVM.PRApproval);
+
+
+
 
 
                 return RedirectToAction(nameof(Index)); // if any mistake the name is gotted
@@ -180,8 +187,40 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
             System.IO.File.Copy(excelTempPath, excelNewPath,true );
 
 
-            return PRAExcelFileName;
+            return excelNewPath;
         }
+        public string EditExcelPRA(string excelpath, PRApproval prapproval)
+        {
+            byte[] fileContents;
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(excelpath)))
+            {
+               
+                var worksheet = package.Workbook.Worksheets["Sheet1"];
+                worksheet.Cells["F5"].Value = prapproval.PRApprovalId;
+                worksheet.Cells["C8"].Value = prapproval.PRApprovalTitle;
+
+
+
+
+                fileContents = package.GetAsByteArray();
+
+            }
+
+            if (fileContents == null || fileContents.Length == 0)
+            { return null; }
+            /*
+            return File(
+                fileContents: fileContents,
+                contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                fileDownloadName: "StudinetList.xlsx"
+            */
+
+
+
+            return "hi";
+        
+        }
+
 
 
 

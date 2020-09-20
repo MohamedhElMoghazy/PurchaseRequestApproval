@@ -24,6 +24,8 @@ namespace PurchaseRequestApproval.Models
         public int RentalPeriodDays { get; set; }
         public Boolean EquipmentTireEngine { get; set; }
         public string JustificationVendor { get; set; }
+        public string ExcelFileUrl { get; set; }// Add file location into the database
+
 
 
 
