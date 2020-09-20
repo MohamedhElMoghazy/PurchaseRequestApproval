@@ -53,6 +53,21 @@ namespace PurchaseRequestApproval.Utility
         public const string Role_Admin_View = "Admin View";
         public const string Role_Admin_Modify = "Admin Modify";
 
+        // Adding basic information for file operation 
+        public const string TempExcelRoot = @"\files\tmp\";
+        public const string TempExcelName = "pratmp_3";
+        public const string TempExcelExt = "xlsx";
+        public const string TempExcelLocation = @"\files\tmp\pratmp_3.xlsx";
+        public const string PRAExcelRoot = @"\files\excel\";
+
+       
+
+
+
+
+
+
+
 
 
 

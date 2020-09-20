@@ -12,6 +12,10 @@ using PurchaseRequestApproval.Utility;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PurchaseRequestApproval.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+
+
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
@@ -20,10 +24,14 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
     public class PRApprovalController : Controller
     {
+        private readonly IWebHostEnvironment _hostEnvironment; // because we will load files into the browser
+
         private readonly IUnitOfWork _unitOfWork;
-        public PRApprovalController(IUnitOfWork unitOfWork)
+        public PRApprovalController(IUnitOfWork unitOfWork,IWebHostEnvironment hostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _hostEnvironment = hostEnvironment; // for laoding pictures 
+
         }
 
         public IActionResult Index()
@@ -140,6 +148,14 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
                 }
                 _unitOfWork.Save();
+                // Adding operation to create an excel file
+                CreateEmptyExcelPRA(prapprovalVM.PRApproval.PRApprovalId.ToString(),
+                     _unitOfWork.Vendor.Get(prapprovalVM.PRApproval.VendorId).VendorName, 
+                    prapprovalVM.PRApproval.PRApprovalTitle,
+                    _unitOfWork.PurchaseType.Get(prapprovalVM.PRApproval.PurchaseTypeId).PurcahseCode.ToString(),
+                    "0");
+
+
                 return RedirectToAction(nameof(Index)); // if any mistake the name is gotted
 
             }
@@ -147,7 +163,26 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         
         
         }
-       
+
+        public string CreateEmptyExcelPRA(string praid, string vendorname, string pratitle, string pratype, string revsion)
+        {
+            string PRAExcelFileName = null;
+            string webRootPath = _hostEnvironment.WebRootPath;
+
+
+            PRAExcelFileName = praid+ " - " + vendorname + " - " + pratitle + " - " + pratype + " - " + revsion +"."+SD.TempExcelExt;
+
+            var excelTempPath = Path.Combine(webRootPath, SD.TempExcelLocation.TrimStart('\\'));
+            var excelNewPath = Path.Combine(webRootPath, SD.PRAExcelRoot.TrimStart('\\'), PRAExcelFileName);
+
+
+
+            System.IO.File.Copy(excelTempPath, excelNewPath,true );
+
+
+            return PRAExcelFileName;
+        }
+
 
 
         #region API CALLS
