@@ -130,19 +130,48 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                 parameter.Add("@PurchaseTypeId", prapprovalVM.PRApproval.PurchaseTypeId);
                 parameter.Add("@SourcedBy", prapprovalVM.PRApproval.SourcedBy);
                 parameter.Add("@ProjectId", prapprovalVM.PRApproval.ProjectId);
-                
+
+                // File operation started
+                string webRootPath = _hostEnvironment.WebRootPath;
+                PRApproval objFromDB = _unitOfWork.PRApproval.Get(prapprovalVM.PRApproval.Id);//testing now for delete the old files
+                if (objFromDB.ExcelFileUrl != null)// //testing now for delete the old files
+
+                {
+                    // this is an edit and we need to remove old image
+
+
+                    // var quotePath = Path.Combine(webRootPath, quoteVM.Quote.PdfUrl.TrimStart('\\'));
+                    var excelPath = Path.Combine(webRootPath, objFromDB.ExcelFileUrl.TrimStart('\\'));
+
+
+                    if (System.IO.File.Exists(excelPath))
+                    {
+                        System.IO.File.Delete(excelPath);
+
+                    }
+
+                }
+                // Adding operation to create an excel file
+                var ExcelFileUrlName = CreateEmptyExcelPRA(prapprovalVM.PRApproval.PRApprovalId.ToString(),
+                     _unitOfWork.Vendor.Get(prapprovalVM.PRApproval.VendorId).VendorName,
+                    prapprovalVM.PRApproval.PRApprovalTitle,
+                    _unitOfWork.PurchaseType.Get(prapprovalVM.PRApproval.PurchaseTypeId).PurcahseCode.ToString(),
+                    "0");
+                parameter.Add("@ExcelFileUrl", ExcelFileUrlName);
+                prapprovalVM.PRApproval.ExcelFileUrl = ExcelFileUrlName;
+
+
+
+
+
+
+
+                // File Operation Ended
+
 
                 if (prapprovalVM.PRApproval.Id==0) // create case whenever no ID posted
                 {
-                    // Adding operation to create an excel file
-                    var ExcelFileUrlName = CreateEmptyExcelPRA(prapprovalVM.PRApproval.PRApprovalId.ToString(),
-                         _unitOfWork.Vendor.Get(prapprovalVM.PRApproval.VendorId).VendorName,
-                        prapprovalVM.PRApproval.PRApprovalTitle,
-                        _unitOfWork.PurchaseType.Get(prapprovalVM.PRApproval.PurchaseTypeId).PurcahseCode.ToString(),
-                        "0");
-                    parameter.Add("@ExcelFileUrl", ExcelFileUrlName);
-                    prapprovalVM.PRApproval.ExcelFileUrl = ExcelFileUrlName;
-
+                    
 
                     _unitOfWork.PRApproval.Add(prapprovalVM.PRApproval); // to allow sql procedrues
                   // _unitOfWork.SP_Call.Execute(SD.Proc_PRApproval_Create, parameter);
@@ -157,7 +186,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                 }
                 
                 _unitOfWork.Save();
-                EditExcelPRA(prapprovalVM.PRApproval.ExcelFileUrl, prapprovalVM.PRApproval);
+                EditExcelPRA(_unitOfWork.PRApproval.Get(prapprovalVM.PRApproval.Id).ExcelFileUrl, prapprovalVM.PRApproval);
 
 
 
@@ -186,22 +215,28 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
             System.IO.File.Copy(excelTempPath, excelNewPath,true );
 
+           // quoteVM.Quote.PdfUrl = @"\files\quotes\" + fileName + extenstion;
 
-            return excelNewPath;
+            return ( SD.PRAExcelRoot + PRAExcelFileName);
         }
         public string EditExcelPRA(string excelpath, PRApproval prapproval)
         {
+            string webRootPath = _hostEnvironment.WebRootPath;
             byte[] fileContents;
-            using (ExcelPackage package = new ExcelPackage(new FileInfo(excelpath)))
+            //using (ExcelPackage package = new ExcelPackage(new FileInfo(excelpath.TrimStart('\\'))))
+           // string excelpathTrimed = excelpath.Replace(@"\\", @"\");
+            string excelpathTrimed = Path.Combine(webRootPath, excelpath.TrimStart('\\'));
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(excelpathTrimed)))
+
             {
-               
-                var worksheet = package.Workbook.Worksheets["Sheet1"];
-                worksheet.Cells["F5"].Value = prapproval.PRApprovalId;
-                worksheet.Cells["C8"].Value = prapproval.PRApprovalTitle;
+
+                ExcelWorksheet worksheet = package.Workbook.Worksheets["Sheet1"];
+                worksheet.Cells["F5"].Value = prapproval.PRApprovalId.ToString();
+                worksheet.Cells["C8"].Value = prapproval.PRApprovalTitle.ToString();
 
 
 
-
+                package.Save();
                 fileContents = package.GetAsByteArray();
 
             }

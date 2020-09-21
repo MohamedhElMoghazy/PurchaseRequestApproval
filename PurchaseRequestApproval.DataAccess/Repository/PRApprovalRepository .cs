@@ -38,6 +38,7 @@ namespace PurchaseRequestApproval.DataAccess.Repository
                 objFromDb.PurchaseTypeId = prapproval.PurchaseTypeId; // update prapproval PurchaseTypeId 
                 objFromDb.SourcedBy = prapproval.SourcedBy; // update prapproval SourcedBy 
                 objFromDb.ProjectId = prapproval.ProjectId; // update prapproval site
+                objFromDb.ExcelFileUrl = prapproval.ExcelFileUrl;
 
 
 
