@@ -19,6 +19,7 @@ namespace PurchaseRequestApproval.Models
         [Display(Name = "Purchase Code")]
         [Required]
         public int PurcahseCode { get; set; } // Code of Purchase Type
+        public string PurchaseTypeAppr { get; set; }
 
 
 

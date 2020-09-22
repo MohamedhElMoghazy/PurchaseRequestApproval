@@ -64,18 +64,20 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                 var parameter = new DynamicParameters();
                 parameter.Add("@PurcahseTypeName", purchaseType.PurcahseTypeName);
                 parameter.Add("@PurcahseCode", purchaseType.PurcahseCode);
+                parameter.Add("@PurchaseTypeAppr", purchaseType.PurchaseTypeAppr);
 
                 if (purchaseType.Id==0) // create case whenever no ID posted
                 {
-                    //_unitOfWork.PurchaseType.Add(purchaseType);
-                    _unitOfWork.SP_Call.Execute(SD.Proc_PurchaseType_Create, parameter);
+                    _unitOfWork.PurchaseType.Add(purchaseType);
+                    //_unitOfWork.SP_Call.Execute(SD.Proc_PurchaseType_Create, parameter);
 
 
                 }
                 else
                 {
                     parameter.Add("@Id", purchaseType.Id);
-                    _unitOfWork.SP_Call.Execute(SD.Proc_PurchaseType_Update , parameter);
+                    //_unitOfWork.SP_Call.Execute(SD.Proc_PurchaseType_Update , parameter);
+                    _unitOfWork.PurchaseType.Update(purchaseType);
 
                 }
                 _unitOfWork.Save();

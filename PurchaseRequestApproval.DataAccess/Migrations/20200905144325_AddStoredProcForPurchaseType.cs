@@ -23,12 +23,13 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
 	                                
                                     @Id int,
 	                                @PurcahseTypeName varchar (100),
-                                    @PurcahseCode varchar(100)
+                                    @PurcahseCode varchar(100),
+                                     @PurchaseTypeAppr varchar(100)
                                
                                     AS 
                                     BEGIN 
                                      UPDATE dbo.PurchaseTypes
-                                     SET  PurcahseTypeName = @PurcahseTypeName, PurcahseCode = @PurcahseCode
+                                     SET  PurcahseTypeName = @PurcahseTypeName, PurcahseCode = @PurcahseCode, PurchaseTypeAppr = @PurchaseTypeAppr
 
                                      WHERE  Id = @Id
                                     END");
@@ -44,11 +45,13 @@ namespace PurchaseRequestApproval.DataAccess.Migrations
 
             migrationBuilder.Sql(@"CREATE PROC usp_CreatePurchaseType
                                    @PurcahseTypeName varchar (100),
-                                   @PurcahseCode varchar(100)
+                                   @PurcahseCode varchar(100),
+                                   @PurchaseTypeAppr varchar(100)
+
                                    AS 
                                    BEGIN 
-                                    INSERT INTO dbo.PurchaseTypes([PurcahseTypeName],[PurcahseCode])
-                                    VALUES (@PurcahseTypeName,@PurcahseCode)
+                                    INSERT INTO dbo.PurchaseTypes([PurcahseTypeName],[PurcahseCode]),[PurchaseTypeAppr])
+                                    VALUES (@PurcahseTypeName,@PurcahseCode,@PurchaseTypeAppr)
 
                                    END");
 

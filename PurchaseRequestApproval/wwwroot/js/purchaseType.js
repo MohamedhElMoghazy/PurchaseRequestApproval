@@ -12,8 +12,9 @@ $(document).ready(function () {
             },
 
             "columns": [
-                { "data": "purcahseTypeName", "width ": "30%" },
-                { "data": "purcahseCode", "width ": "30%" },
+                { "data": "purcahseTypeName", "width ": "20%" },
+                { "data": "purcahseCode", "width ": "20%" },
+                { "data": "purchaseTypeAppr", "width ": "20%" },
                 {
                     "data": "id",
                     "render": function (data) {

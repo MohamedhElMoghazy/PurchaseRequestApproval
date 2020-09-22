@@ -231,8 +231,53 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
             {
 
                 ExcelWorksheet worksheet = package.Workbook.Worksheets["Sheet1"];
-                worksheet.Cells["F5"].Value = prapproval.PRApprovalId.ToString();
+                ExcelWorksheet worksheetcover = package.Workbook.Worksheets["Cover Page"];
+                worksheet.Cells["F5"].Value = prapproval.PRApprovalId; // Setting the ID
+                                                                       // Setup Area Code and Request Type
+                worksheet.Cells["F6"].Value = _unitOfWork.PurchaseType.Get((prapproval.PurchaseTypeId)).PurcahseCode; // Setting the Area Code
+                worksheet.Cells["F7"].Value = _unitOfWork.PurchaseType.Get((prapproval.PurchaseTypeId)).PurchaseTypeAppr; // Setting the Area Code
+
                 worksheet.Cells["C8"].Value = prapproval.PRApprovalTitle.ToString();
+                worksheet.Cells["C10"].Value = prapproval.PRApprovalDescription;
+
+                // Check the data type and fill the code
+                if (_unitOfWork.PurchaseType.Get((prapproval.PurchaseTypeId)).PurcahseCode == 17)
+                {
+                    worksheet.Cells["D11"].Value = prapproval.RentalPeriodDays;
+                    worksheet.Cells["D12"].Value = prapproval.EquipmentTireEngine;
+                    worksheet.Cells["F11"].Value = prapproval.GateAccess;
+                   
+                }
+                else if ((_unitOfWork.PurchaseType.Get((prapproval.PurchaseTypeId)).PurcahseCode == 18))
+                {
+                    worksheet.Cells["D11"].Value = prapproval.CMOA == true ? "Yes" : "No";
+                    worksheet.Cells["D12"].Value = prapproval.MatCorVer == true ? "Yes" : "No";
+                    worksheet.Cells["F11"].Value = prapproval.Warranty == true ? "Yes" : "No";
+
+                }
+                else if ((_unitOfWork.PurchaseType.Get((prapproval.PurchaseTypeId)).PurcahseCode == 19))
+                {
+                    worksheet.Cells["D11"].Value = prapproval.WorkDurationSiteDays;
+                    worksheet.Cells["D12"].Value = prapproval.GateAccess==true? "Yes":"No";
+                    worksheet.Cells["F11"].Value = prapproval.RateSheet == true ? "Yes" : "No";
+                }
+                else
+                {
+                    worksheet.Cells["D11"].Value = null;
+                    worksheet.Cells["D12"].Value = null;
+                    worksheet.Cells["F11"].Value = null;
+
+                }
+
+                worksheet.Cells["F12"].Value = prapproval.WorkOrder; // Set the work order
+                worksheet.Cells["C30"].Value = prapproval.JustificationVendor; // Set the Justificaiton for the vendor
+                worksheet.Cells["D31"].Value = _unitOfWork.Vendor.Get( prapproval.VendorId).VendorName; // Set the Justificaiton for the vendor
+                worksheet.Cells["D60"].Value = _unitOfWork.Employee.Get(prapproval.SourcedBy).EmployeeName; // Set the Submitted by in the Database
+
+                // Arrange for cover page
+                worksheetcover.Cells["B6"].Value = "Contract No. "+ _unitOfWork.Project.Get(prapproval.ProjectId).ContractNo.ToString();
+                worksheetcover.Cells["B7"].Value = "WPI " + _unitOfWork.Project.Get(prapproval.ProjectId).WorkPackageIn.ToString()+ ": Site Services & Maintenance";
+
 
 
 
