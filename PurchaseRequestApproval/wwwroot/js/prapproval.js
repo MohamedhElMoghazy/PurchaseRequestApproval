@@ -29,7 +29,14 @@ $(document).ready(function () {
                     "data": "id",
                     "render": function (data) {
                         return `
+
                             <div class="text-center">
+                            
+                              <a href="/Employee/PRAQuote/CheckPRARev?PRIDRecords=${data}" class="btn btn-primary text-white" style="cursor:pointer">
+                                    <i class="fas fa-edit"></i> 
+                              </a>
+
+
                                 <a href="/Employee/PRApproval/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
                                     <i class="fas fa-edit"></i> 
                                 </a>

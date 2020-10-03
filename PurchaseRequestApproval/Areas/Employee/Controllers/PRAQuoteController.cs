@@ -21,6 +21,10 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
     public class PRAQuoteController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        //public int PRAIDRecord = 0; // To record the public so we could search custom the screeen according to it
+       // public int QuoteIDRecord = 0; // To record the public so we could search custom the screeen according to it
+
+
         public PRAQuoteController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -28,8 +32,31 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+           // if (PIid == null )
             return View();
         }
+
+        //public IActionResult CheckPRARev(int PRIDRecords)
+        //{
+        //    this.PRAIDRecord=PRIDRecords; // Set the PRA Record to the required PRI
+             
+
+
+        //    return View("Index",this);
+             
+        //    //Index();// Call
+
+        //    //if ((_unitOfWork.PRAQuote.GetAll(
+        //    //    u => u.PRAId == (PRIDRecords),
+        //    //    u => u.OrderBy(x => x.PRARevision)).
+        //    //    Count() == 0))
+        //    //{ Index(()); }
+        //    ////return View();
+        //    //int testcount = (_unitOfWork.PRAQuote.GetAll(
+        //    //    u => u.PRAId == (PRIDRecords),
+        //    //    u => u.OrderBy(x => x.PRARevision)).
+        //    //    Count());
+        //}
 
         // create an method for upsert and can get null Id in case of create 
         public IActionResult Upsert(int? id)
@@ -182,10 +209,30 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         public IActionResult GetAll()
          {
             // Quote1 and Quote 2 has been removed from including properties to avoid the errors
-            var allObj = _unitOfWork.PRAQuote.GetAll(includeProperties: "PRApproval,Employee,Quote"); // commented to allow the link to procedures
+            // adding select criteria for the data on the screen
+            //if (PRAIDRecord == 0)
+            //{
+            //    // commented to allow the link to procedures
+            //    var allObj = _unitOfWork.PRAQuote.GetAll(includeProperties: "PRApproval,Employee,Quote");
+            //    return Json(new { data = allObj });
 
-           // var allObj = _unitOfWork.SP_Call.List<PRAQuote>(SD.Proc_PRAQuote_GetAll, null); // to allow stored procedure
+            //}
+            //else
+            //{
+            //    // Allow to show all properties for certain ID
+            //    var allObj = _unitOfWork.PRAQuote.GetAll(
+            //    u => u.PRAId == (PRAIDRecord),
+            //    u => u.OrderBy(x => x.PRARevision),includeProperties: "PRApproval,Employee,Quote");
+
+            //    return Json(new { data = allObj });
+
+            //}
+
+            // commented to allow the link to procedures
+            var allObj = _unitOfWork.PRAQuote.GetAll(includeProperties: "PRApproval,Employee,Quote");
             return Json(new { data = allObj });
+
+            // var allObj = _unitOfWork.SP_Call.List<PRAQuote>(SD.Proc_PRAQuote_GetAll, null); // to allow stored procedure
 
 
             /*

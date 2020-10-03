@@ -41,7 +41,7 @@ namespace PurchaseRequestApproval
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation(); // add AddRazorRunTime Compilation To the poject
-            services.AddRazorPages();
+            services.AddRazorPages().AddRazorRuntimeCompilation() ;
 
             // CORRECT THE AREAS AFTER AUTHORIZATION
             services.ConfigureApplicationCookie(options =>

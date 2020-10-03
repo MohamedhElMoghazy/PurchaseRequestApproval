@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Authorization;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using OfficeOpenXml;
+using Microsoft.AspNetCore.Http;
+
 
 namespace PurchaseRequestApproval.Areas.Admin.Controllers
 {
@@ -215,7 +217,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
             System.IO.File.Copy(excelTempPath, excelNewPath,true );
 
-           // quoteVM.Quote.PdfUrl = @"\files\quotes\" + fileName + extenstion;
+            // quoteVM.Quote.PdfUrl = @"\files\quotes\" + fileName + extenstion;
 
             return ( SD.PRAExcelRoot + PRAExcelFileName);
         }
@@ -279,22 +281,50 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                 worksheetcover.Cells["B7"].Value = "WPI " + _unitOfWork.Project.Get(prapproval.ProjectId).WorkPackageIn.ToString()+ ": Site Services & Maintenance";
 
 
-
-
                 package.Save();
+
                 fileContents = package.GetAsByteArray();
+                //package.SaveAs(FileInfo(excelpathTrimed));
+
+                Response.Clear();
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                //Response.BinaryWrite(package.GetAsByteArray());  // send the file
+                // Response.End();
+                // Response.BinaryWrite(package.GetAsByteArray());
+                //Response.End();
+
+
+
+
+
+                // clear the work area
+                // Response.Clear();
+                //Response.AddHeader("content-disposition", "attachment;  filename=ExcelDemo.xlsx");
+                //Response.BinaryWrite(package.GetAsByteArray());
+
+
+
 
             }
 
             if (fileContents == null || fileContents.Length == 0)
             { return null; }
+
+            
+            File(
+               fileContents: fileContents,
+               contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+           
+
             /*
-            return File(
+             return File(
                 fileContents: fileContents,
                 contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                fileDownloadName: "StudinetList.xlsx"
+                fileDownloadName: "StudinetList.xlsx");
+            
             */
-
 
 
             return "hi";
