@@ -136,7 +136,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                 // File operation started
                 string webRootPath = _hostEnvironment.WebRootPath;
                 PRApproval objFromDB = _unitOfWork.PRApproval.Get(prapprovalVM.PRApproval.Id);//testing now for delete the old files
-                if (objFromDB.ExcelFileUrl != null)// //testing now for delete the old files
+                if ((objFromDB!=null) &&(objFromDB.ExcelFileUrl != null))// //testing now for delete the old files
 
                 {
                     // this is an edit and we need to remove old image
@@ -173,8 +173,8 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
 
                 if (prapprovalVM.PRApproval.Id==0) // create case whenever no ID posted
                 {
-                    
 
+                    prapprovalVM.PRApproval.PRApprovalId = GetNextPRID(); // Get next ID
                     _unitOfWork.PRApproval.Add(prapprovalVM.PRApproval); // to allow sql procedrues
                   // _unitOfWork.SP_Call.Execute(SD.Proc_PRApproval_Create, parameter);
                                       
@@ -330,6 +330,24 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
             return "hi";
         
         }
+
+        public int GetNextPRID()
+        {
+            int LastPRID = 0;
+            List<int> ListPRID = new List<int>();
+            int TotalPID = _unitOfWork.PRApproval.GetAll().Count();
+            foreach (var element in _unitOfWork.PRApproval.GetAll())
+            {
+                ListPRID.Add(element.PRApprovalId);
+            }
+            LastPRID = ListPRID.Max();
+            if (TotalPID == 0) { return SD.StartingPRID; } // If no recored we start with start ID
+
+            return (LastPRID + 1);
+
+
+        }
+
 
 
 
