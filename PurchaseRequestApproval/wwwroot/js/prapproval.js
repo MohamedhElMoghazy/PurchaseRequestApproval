@@ -13,14 +13,14 @@ $(document).ready(function () {
 
             "columns": [
 
-                { "data": "prApprovalId", "width ": "11.25%" },
-                { "data": "prApprovalTitle", "width ": "11.25%" },
-                { "data": "prApprovalDescription", "width ": "11.25%" },
-                { "data": "workOrder", "width ": "11.25%" },
-                { "data": "vendor.vendorName", "width ": "11.25%" },
-                { "data": "purchaseType.purcahseTypeName", "width ": "11.25%" },
-                { "data": "employee.employeeName", "width ": "11.25%" },
-                { "data": "project.projectName", "width ": "11.25%" },
+                { "data": "prApprovalId", "width ": "10%" },
+                { "data": "prApprovalTitle", "width ": "10%" },
+                { "data": "prApprovalDescription", "width ": "15%" },
+                { "data": "workOrder", "width ": "10%" },
+                { "data": "vendor.vendorName", "width ": "10%" },
+                { "data": "purchaseType.purcahseTypeName", "width ": "10%" },
+                { "data": "employee.employeeName", "width ": "10%" },
+                { "data": "project.projectName", "width ": "10%" },
 
 
 
@@ -31,11 +31,11 @@ $(document).ready(function () {
                         return `
 
                             <div class="text-center">
-                            
-                              <a href="/Employee/PRAQuote/CheckPRARev?PRIDRecords=${data}" class="btn btn-primary text-white" style="cursor:pointer">
-                                    <i class="fas fa-edit"></i> 
-                              </a>
 
+                              <a href="/Employee/PRAQuote/CheckPRARev?PRIDRecords=${data}" class="btn btn-primary text-white" style="cursor:pointer">
+                                <i class="fas fa-plus-circle"></i>  
+                                </a>
+                            
 
                                 <a href="/Employee/PRApproval/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
                                     <i class="fas fa-edit"></i> 
@@ -45,7 +45,7 @@ $(document).ready(function () {
                                 </a>
                             </div>
                            `;
-                    }, "width": "10%"
+                    }, "width": "15%"
                 }
             ]
         });

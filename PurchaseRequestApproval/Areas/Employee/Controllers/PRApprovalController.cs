@@ -110,7 +110,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
         [Authorize(Roles = SD.Role_Admin_Modify + "," + SD.Role_Admin_View + "," + SD.Role_Employee_Modify)]// Add authorization Level
 
         public IActionResult Upsert(PRApprovalVM prapprovalVM) 
-        { 
+        {
             if (ModelState.IsValid)
             {
                 // to pass parameters to sql procedrues
@@ -136,7 +136,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                 // File operation started
                 string webRootPath = _hostEnvironment.WebRootPath;
                 PRApproval objFromDB = _unitOfWork.PRApproval.Get(prapprovalVM.PRApproval.Id);//testing now for delete the old files
-                if ((objFromDB!=null) &&(objFromDB.ExcelFileUrl != null))// //testing now for delete the old files
+                if ((objFromDB != null) && (objFromDB.ExcelFileUrl != null))// //testing now for delete the old files
 
                 {
                     // this is an edit and we need to remove old image
@@ -153,8 +153,17 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                     }
 
                 }
-                // Adding operation to create an excel file
-                var ExcelFileUrlName = CreateEmptyExcelPRA(prapprovalVM.PRApproval.PRApprovalId.ToString(),
+                // Start check case if edit or new to create the ID
+                if (prapprovalVM.PRApproval.Id == 0)
+                { prapprovalVM.PRApproval.PRApprovalId = GetNextPRID(); }
+                else
+                { prapprovalVM.PRApproval.PRApprovalId = _unitOfWork.PRApproval.Get(prapprovalVM.PRApproval.Id).PRApprovalId; }
+
+
+                // End check case if edit or new to create the ID
+
+// Adding operation to create an excel file
+var ExcelFileUrlName = CreateEmptyExcelPRA(prapprovalVM.PRApproval.PRApprovalId.ToString(),
                      _unitOfWork.Vendor.Get(prapprovalVM.PRApproval.VendorId).VendorName,
                     prapprovalVM.PRApproval.PRApprovalTitle,
                     _unitOfWork.PurchaseType.Get(prapprovalVM.PRApproval.PurchaseTypeId).PurcahseCode.ToString(),
@@ -174,7 +183,7 @@ namespace PurchaseRequestApproval.Areas.Admin.Controllers
                 if (prapprovalVM.PRApproval.Id==0) // create case whenever no ID posted
                 {
 
-                    prapprovalVM.PRApproval.PRApprovalId = GetNextPRID(); // Get next ID
+                    //prapprovalVM.PRApproval.PRApprovalId = GetNextPRID(); // Get next ID
                     _unitOfWork.PRApproval.Add(prapprovalVM.PRApproval); // to allow sql procedrues
                   // _unitOfWork.SP_Call.Execute(SD.Proc_PRApproval_Create, parameter);
                                       

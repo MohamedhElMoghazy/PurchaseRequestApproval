@@ -1,0 +1,5 @@
+Link in JS for pr approval
+
+                              <a href="/Employee/PRAQuote/CheckPRARev?PRIDRecords=${data}" class="btn btn-primary text-white" style="cursor:pointer">
+                                    <i class="fas fa-edit"></i> 
+                              </a>

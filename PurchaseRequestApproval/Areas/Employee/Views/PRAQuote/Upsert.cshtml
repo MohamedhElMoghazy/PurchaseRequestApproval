@@ -24,9 +24,9 @@
                     <label asp-for="PRAQuote.PRAQuoteDate"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="PRAQuote.PRAQuoteDate" class=" form-control" />
+                    <input asp-for="PRAQuote.PRAQuoteDate" class=" form-control" type="date" onload="getDate()" />
                     @*<textarea asp-for="PRApproval.PRApprovalId" class="form-control"></textarea>*@
-                    <span asp-validation-for="PRAQuote.PRAQuoteDate" class=" text-danger"></span>
+                    <span asp-validation-for="PRAQuote.PRAQuoteDate" class=" text-danger" ></span>
                 </div>
             </div>
 
