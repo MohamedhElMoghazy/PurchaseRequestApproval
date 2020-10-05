@@ -221,14 +221,28 @@ var ExcelFileUrlName = CreateEmptyExcelPRA(prapprovalVM.PRApproval.PRApprovalId.
 
             var excelTempPath = Path.Combine(webRootPath, SD.TempExcelLocation.TrimStart('\\'));
             var excelNewPath = Path.Combine(webRootPath, SD.PRAExcelRoot.TrimStart('\\'), PRAExcelFileName);
+            /*
+            // Start testing create excel file from excel using excel element
+            string excelpathTrimed = Path.Combine(webRootPath, excelTempPath.TrimStart('\\'));
+            using (ExcelPackage package = new ExcelPackage(new FileInfo(excelpathTrimed)))
+
+            {
+
+                ExcelWorksheet worksheet = package.Workbook.Worksheets["Sheet1"];
+                ExcelWorksheet worksheetcover = package.Workbook.Worksheets["Cover Page"];
+                FileInfo fi = new FileInfo(excelNewPath);
+                package.SaveAs(fi);
 
 
+            }
+                // End testing of create excel file
+            */
+                SD.CopyBinaryFile(excelTempPath, excelNewPath);
+               //System.IO.File.Copy(excelTempPath, excelNewPath,true );
 
-            System.IO.File.Copy(excelTempPath, excelNewPath,true );
+                // quoteVM.Quote.PdfUrl = @"\files\quotes\" + fileName + extenstion;
 
-            // quoteVM.Quote.PdfUrl = @"\files\quotes\" + fileName + extenstion;
-
-            return ( SD.PRAExcelRoot + PRAExcelFileName);
+                return ( SD.PRAExcelRoot + PRAExcelFileName);
         }
         public string EditExcelPRA(string excelpath, PRApproval prapproval)
         {
@@ -289,16 +303,27 @@ var ExcelFileUrlName = CreateEmptyExcelPRA(prapprovalVM.PRApproval.PRApprovalId.
                 worksheetcover.Cells["B6"].Value = "Contract No. "+ _unitOfWork.Project.Get(prapproval.ProjectId).ContractNo.ToString();
                 worksheetcover.Cells["B7"].Value = "WPI " + _unitOfWork.Project.Get(prapproval.ProjectId).WorkPackageIn.ToString()+ ": Site Services & Maintenance";
 
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-                package.Save();
+               // package.Save(); // file could be saved using the file stream
 
-                fileContents = package.GetAsByteArray();
+                // One way to save file is to save it as abinary file
+                 fileContents = package.GetAsByteArray();
+                System.IO.File.WriteAllBytes(excelpathTrimed, fileContents);
+
+                // file could be saved using save as method
+                //fileContents = null;
+                //FileInfo fi = new FileInfo(excelpathTrimed);
+                //package.SaveAs(fi);
+
+
+
+
+
                 //package.SaveAs(FileInfo(excelpathTrimed));
 
                 Response.Clear();
-                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-                //Response.BinaryWrite(package.GetAsByteArray());  // send the file
                 // Response.End();
                 // Response.BinaryWrite(package.GetAsByteArray());
                 //Response.End();
@@ -339,6 +364,8 @@ var ExcelFileUrlName = CreateEmptyExcelPRA(prapprovalVM.PRApproval.PRApprovalId.
             return "hi";
         
         }
+
+
 
         public int GetNextPRID()
         {

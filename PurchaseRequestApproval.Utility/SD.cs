@@ -64,6 +64,64 @@ namespace PurchaseRequestApproval.Utility
 
 
 
+        static public bool CopyBinaryFile(string srcfilename, string destfilename)
+
+        {
+
+
+
+            if (System.IO.File.Exists(srcfilename) == false)
+
+            {
+
+                Console.WriteLine("Could not find the Source file");
+
+                return false;
+
+            }
+
+
+
+            System.IO.Stream s1 = System.IO.File.Open(srcfilename, System.IO.FileMode.Open);
+
+            System.IO.Stream s2 = System.IO.File.Open(destfilename, System.IO.FileMode.Create);
+
+
+
+            System.IO.BinaryReader f1 = new System.IO.BinaryReader(s1);
+
+            System.IO.BinaryWriter f2 = new System.IO.BinaryWriter(s2);
+
+
+
+            while (true)
+
+            {
+
+                byte[] buf = new byte[10240];
+
+                int sz = f1.Read(buf, 0, 10240);
+
+                if (sz <= 0)
+
+                    break;
+
+                f2.Write(buf, 0, sz);
+
+                if (sz < 10240)
+
+                    break; // eof reached
+
+            }
+
+            f1.Close();
+
+            f2.Close();
+
+            return true;
+
+        }
+
 
 
 
